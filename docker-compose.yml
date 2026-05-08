@@ -1,0 +1,35 @@
+services:
+  web:
+    image: nginx:alpine
+    container_name: neratovka-website
+    restart: unless-stopped
+    volumes:
+      - ./html:/usr/share/nginx/html:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - nginx_proxy
+
+    # ── Routing config ──────────────────────────────────────────────
+    # Pick ONE of the blocks below depending on what's running on the host.
+    # To detect: `docker ps` on the server and look for `nginx-proxy`,
+    # `acme-companion`, `traefik` or `caddy` containers.
+
+    # ── Option A: jwilder/nginx-proxy + acme-companion ──────────────
+    environment:
+      VIRTUAL_HOST: neratovka.ru,www.neratovka.ru
+      VIRTUAL_PORT: "80"
+      LETSENCRYPT_HOST: neratovka.ru,www.neratovka.ru
+      LETSENCRYPT_EMAIL: popovconstantine@gmail.com
+
+    # ── Option B: Traefik ───────────────────────────────────────────
+    # labels:
+    #   - "traefik.enable=true"
+    #   - "traefik.http.routers.neratovka.rule=Host(`neratovka.ru`) || Host(`www.neratovka.ru`)"
+    #   - "traefik.http.routers.neratovka.entrypoints=websecure"
+    #   - "traefik.http.routers.neratovka.tls.certresolver=letsencrypt"
+    #   - "traefik.http.services.neratovka.loadbalancer.server.port=80"
+
+networks:
+  nginx_proxy:
+    name: nginx_proxy
+    external: true

@@ -1,0 +1,1269 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Нератовка — Книга памяти. Уроженцы села в Великой Отечественной войне</title>
+<meta name="description" content="Книга памяти села Нератовка: 110 уроженцев — участников Великой Отечественной войны 1941–1945. Имена, годы рождения, ссылки на «Память народа»." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=PT+Serif+Caption&display=swap&subset=cyrillic" rel="stylesheet" />
+<style>
+  :root {
+    --paper: #e9dfc8;
+    --paper-soft: #f1e8d3;
+    --paper-deep: #d8cdb1;
+    --paper-edge: #c2b594;
+    --ink: #1a1410;
+    --ink-soft: #3d3329;
+    --ink-faded: #6e6151;
+    --ink-quiet: #8e8167;
+    --rule: #b8a984;
+    --banner: #7a1414;
+    --banner-deep: #4a0a0a;
+    --gold: #8a6a1f;
+    --gold-soft: #b89548;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "PT Serif", Georgia, "Times New Roman", serif;
+    font-size: 18px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    overflow-x: hidden;
+  }
+
+  /* Paper grain — subtle SVG noise overlay */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.10  0 0 0 0 0.08  0 0 0 0 0.06  0 0 0 0.10 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    opacity: 0.55;
+    mix-blend-mode: multiply;
+  }
+
+  /* Paper vignette */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse at 50% 0%, transparent 60%, rgba(80, 60, 30, 0.18) 100%),
+      radial-gradient(ellipse at 50% 100%, transparent 60%, rgba(80, 60, 30, 0.18) 100%);
+  }
+
+  main { position: relative; z-index: 2; }
+
+  /* ──── HERO ──────────────────────────────────────────── */
+  .hero {
+    min-height: 100svh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding: 32px 24px 28px;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: "PT Serif Caption", "PT Serif", serif;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+  }
+
+  .topbar a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 1px;
+  }
+  .topbar a:hover { color: var(--banner); border-bottom-color: var(--banner); }
+
+  .hero-stage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: clamp(24px, 8vh, 96px) 0;
+    position: relative;
+  }
+
+  .eyebrow {
+    font-family: "PT Serif Caption", "PT Serif", serif;
+    font-size: 13px;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+    margin: 0 0 28px 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .eyebrow::before, .eyebrow::after {
+    content: "";
+    display: block;
+    width: 36px;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  .years {
+    font-family: "Old Standard TT", "PT Serif", serif;
+    font-weight: 400;
+    font-size: clamp(56px, 13vw, 180px);
+    line-height: 0.92;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin: 0;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: clamp(12px, 3vw, 40px);
+    position: relative;
+    max-width: 100%;
+  }
+  .years .dash {
+    color: var(--banner);
+    font-size: 0.7em;
+    transform: translateY(-0.05em);
+  }
+
+  .village {
+    font-family: "Old Standard TT", "PT Serif", serif;
+    font-weight: 700;
+    font-style: italic;
+    font-size: clamp(36px, 7vw, 88px);
+    color: var(--banner);
+    margin: clamp(24px, 4vh, 56px) 0 0 0;
+    line-height: 1;
+    letter-spacing: 0.02em;
+  }
+
+  .hero-sub {
+    font-family: "PT Serif", serif;
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: clamp(16px, 1.6vw, 20px);
+    margin: 28px 0 0 0;
+    max-width: 38ch;
+  }
+
+  .hero-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: "PT Serif Caption", "PT Serif", serif;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+    border-top: 1px solid var(--rule);
+    padding-top: 16px;
+  }
+
+  .scroll-hint {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .scroll-hint::after {
+    content: "";
+    width: 1px;
+    height: 28px;
+    background: var(--ink-faded);
+    display: block;
+    animation: drip 2.4s ease-in-out infinite;
+    transform-origin: top;
+  }
+  @keyframes drip {
+    0%   { transform: scaleY(0); opacity: 0; }
+    40%  { transform: scaleY(1); opacity: 1; }
+    100% { transform: scaleY(1) translateY(28px); opacity: 0; }
+  }
+
+  /* ──── SECTIONS ──────────────────────────────────────── */
+  section {
+    padding: clamp(64px, 9vh, 128px) 24px;
+    position: relative;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .container {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+  .container--narrow {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .section-mark {
+    font-family: "PT Serif Caption", "PT Serif", serif;
+    font-size: 11px;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--banner);
+    margin: 0 0 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .section-mark::before {
+    content: "";
+    display: block;
+    width: 36px;
+    height: 1px;
+    background: var(--banner);
+  }
+
+  h2.section-title {
+    font-family: "Old Standard TT", "PT Serif", serif;
+    font-weight: 700;
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.1;
+    margin: 0 0 32px 0;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+
+  /* ──── DEDICATION ────────────────────────────────────── */
+  .dedication {
+    text-align: center;
+  }
+
+  .dedication .lead {
+    font-family: "Old Standard TT", "PT Serif", serif;
+    font-style: italic;
+    font-size: clamp(22px, 2.6vw, 32px);
+    line-height: 1.5;
+    color: var(--ink);
+    max-width: 32ch;
+    margin: 0 auto 40px;
+  }
+
+  .dedication p {
+    font-size: clamp(17px, 1.4vw, 19px);
+    color: var(--ink-soft);
+    text-align: left;
+    margin: 0 0 1.1em 0;
+    text-indent: 2.4em;
+  }
+  .dedication p:first-of-type::first-letter {
+    font-family: "Old Standard TT", "PT Serif", serif;
+    float: left;
+    font-size: 4.4em;
+    line-height: 0.85;
+    padding: 6px 12px 0 0;
+    color: var(--banner);
+    font-weight: 700;
+  }
+  .dedication p:first-of-type { text-indent: 0; }
+
+  /* Ornamental rule */
+  .ornament {
+    margin: 48px auto;
+    text-align: center;
+    color: var(--banner);
+    font-size: 22px;
+    letter-spacing: 0.6em;
+    line-height: 1;
+  }
+
+  /* ──── STATS ─────────────────────────────────────────── */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0;
+    border-top: 1px solid var(--rule);
+    border-left: 1px solid var(--rule);
+  }
+
+  .stat {
+    padding: 36px 28px;
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    text-align: center;
+    position: relative;
+  }
+
+  .stat-num {
+    font-family: "Old Standard TT", "PT Serif", serif;
+    font-size: clamp(56px, 7vw, 96px);
+    line-height: 0.95;
+    color: var(--ink);
+    margin: 0;
+    font-weight: 400;
+  }
+  .stat--accent .stat-num { color: var(--banner); }
+  .stat--gold .stat-num { color: var(--gold); }
+
+  .stat-label {
+    font-family: "PT Serif Caption", "PT Serif", serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+    margin: 14px 0 0 0;
+  }
+  .stat-note {
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-faded);
+    margin: 6px 0 0 0;
+  }
+
+  /* ──── 126 MARKS GRID ────────────────────────────────── */
+  .marks-wrap {
+    margin-top: 48px;
+  }
+
+  .marks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(28px, 1fr));
+    gap: 6px;
+    margin: 32px 0;
+    padding: 28px;
+    background: var(--paper-soft);
+    border: 1px solid var(--rule);
+    box-shadow:
+      inset 0 0 0 4px var(--paper-soft),
+      inset 0 0 0 5px var(--paper-edge),
+      0 1px 0 var(--paper-deep);
+  }
+
+  .mark {
+    aspect-ratio: 1;
+    background: var(--ink-quiet);
+    position: relative;
+    cursor: help;
+    transition: transform 0.18s ease, background 0.18s ease, outline 0.18s ease;
+    outline: 0px solid transparent;
+  }
+  .mark:hover {
+    transform: scale(1.5);
+    z-index: 4;
+    outline: 1px solid var(--ink);
+  }
+
+  .mark--fallen { background: var(--banner); }
+  .mark--fallen::after {
+    content: "";
+    position: absolute;
+    inset: 28% 45% 28% 45%;
+    background: var(--paper-soft);
+  }
+  .mark--fallen::before {
+    content: "";
+    position: absolute;
+    inset: 45% 28% 45% 28%;
+    background: var(--paper-soft);
+  }
+  .mark--missing {
+    background: transparent;
+    box-shadow: inset 0 0 0 1.5px var(--banner-deep);
+  }
+  .mark--missing::after {
+    content: "?";
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: var(--banner-deep);
+    font-size: 11px;
+    font-style: italic;
+    line-height: 1;
+  }
+  .mark--awarded {
+    background: var(--gold);
+  }
+  .mark--awarded::after {
+    content: "";
+    position: absolute;
+    inset: 50% 50% 50% 50%;
+    width: 1px; height: 1px;
+    box-shadow:
+      0 -3px 0 var(--paper-soft),
+      0  3px 0 var(--paper-soft),
+      -3px 0 0 var(--paper-soft),
+      3px 0 0 var(--paper-soft);
+  }
+  .mark--wounded {
+    background: var(--ink-soft);
+  }
+  .mark--wounded::after {
+    content: "";
+    position: absolute;
+    left: 18%; right: 18%;
+    top: 50%;
+    height: 1.5px;
+    background: var(--paper-soft);
+    transform: translateY(-50%);
+  }
+
+  .marks-legend {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 14px 28px;
+    font-family: "PT Serif Caption", "PT Serif", serif;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+    margin-top: 24px;
+  }
+  .legend-item { display: flex; align-items: center; gap: 10px; }
+  .legend-swatch {
+    width: 16px; height: 16px;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .legend-swatch--fallen { background: var(--banner); }
+  .legend-swatch--missing { box-shadow: inset 0 0 0 1.5px var(--banner-deep); }
+  .legend-swatch--awarded { background: var(--gold); }
+  .legend-swatch--wounded { background: var(--ink-soft); }
+  .legend-swatch--other { background: var(--ink-quiet); }
+
+  /* Tooltip */
+  .mark-tip {
+    position: fixed;
+    background: var(--ink);
+    color: var(--paper-soft);
+    padding: 6px 12px;
+    font-size: 13px;
+    line-height: 1.4;
+    font-family: "PT Serif", serif;
+    pointer-events: none;
+    opacity: 0;
+    transform: translate(-50%, calc(-100% - 12px));
+    transition: opacity 0.12s;
+    z-index: 100;
+    white-space: nowrap;
+    max-width: 320px;
+  }
+  .mark-tip::after {
+    content: "";
+    position: absolute;
+    left: 50%; bottom: -6px;
+    width: 0; height: 0;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: var(--ink);
+    border-bottom: 0;
+  }
+  .mark-tip.visible { opacity: 1; }
+  .mark-tip em {
+    font-style: italic;
+    color: var(--gold-soft);
+  }
+
+  /* ──── YEARS CHART ──────────────────────────────────── */
+  .chart-block {
+    margin-top: 56px;
+  }
+
+  .chart-title {
+    font-family: "Old Standard TT", "PT Serif", serif;
+    font-style: italic;
+    font-size: clamp(20px, 2.2vw, 26px);
+    margin: 0 0 6px 0;
+    color: var(--ink);
+  }
+  .chart-sub {
+    font-style: italic;
+    color: var(--ink-faded);
+    margin: 0 0 32px 0;
+    font-size: 15px;
+  }
+
+  .years-chart {
+    display: grid;
+    grid-template-columns: 64px 1fr 38px;
+    gap: 4px 16px;
+    align-items: center;
+    font-family: "PT Serif", serif;
+    font-size: 14px;
+  }
+
+  .yc-year {
+    text-align: right;
+    color: var(--ink-faded);
+    font-variant-numeric: tabular-nums;
+  }
+  .yc-year strong {
+    color: var(--ink);
+    font-weight: 700;
+  }
+  .yc-year .age {
+    display: block;
+    font-size: 11px;
+    color: var(--ink-quiet);
+    font-style: italic;
+  }
+  .yc-bar {
+    height: 14px;
+    background: var(--ink);
+    transition: width 1s cubic-bezier(.2,.8,.2,1);
+    width: 0;
+    position: relative;
+  }
+  .yc-bar.young { background: var(--banner); }
+  .yc-bar.youngest { background: var(--banner); position: relative; }
+  .yc-bar.youngest::after {
+    content: "";
+    position: absolute;
+    right: -2px; top: -3px; bottom: -3px;
+    width: 2px;
+    background: var(--banner-deep);
+  }
+  .yc-count {
+    font-variant-numeric: tabular-nums;
+    color: var(--ink);
+    font-weight: 700;
+    text-align: left;
+  }
+
+  /* ──── STATUS DISTRIBUTION ───────────────────────────── */
+  .status-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--rule);
+  }
+  .status-list li {
+    display: grid;
+    grid-template-columns: 1fr auto 56px;
+    gap: 16px;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .status-name {
+    font-size: 17px;
+  }
+  .status-bar {
+    width: clamp(120px, 30vw, 320px);
+    height: 6px;
+    background: var(--paper-deep);
+    position: relative;
+  }
+  .status-bar::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--ink);
+    width: var(--w, 0%);
+    transition: width 1.2s cubic-bezier(.2,.8,.2,1);
+  }
+  .status-list li.fallen .status-bar::after { background: var(--banner); }
+  .status-list li.fallen .status-name { color: var(--banner); }
+  .status-list li.awarded .status-bar::after { background: var(--gold); }
+  .status-count {
+    font-family: "Old Standard TT", "PT Serif", serif;
+    font-size: 22px;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    color: var(--ink);
+  }
+
+  /* ──── ROLL CALL (full list) ─────────────────────────── */
+  .roll-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .roll-search {
+    flex: 1 1 240px;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--ink-faded);
+    padding: 10px 4px;
+    font-family: "PT Serif", serif;
+    font-size: 17px;
+    color: var(--ink);
+    font-style: italic;
+  }
+  .roll-search:focus {
+    outline: none;
+    border-bottom-color: var(--banner);
+  }
+  .roll-search::placeholder { color: var(--ink-quiet); }
+
+  .roll-filters {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    font-family: "PT Serif Caption", "PT Serif", serif;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .roll-filters button {
+    background: transparent;
+    border: 1px solid var(--rule);
+    color: var(--ink-faded);
+    padding: 6px 12px;
+    cursor: pointer;
+    font: inherit;
+    text-transform: inherit;
+    letter-spacing: inherit;
+    transition: all 0.16s;
+  }
+  .roll-filters button:hover {
+    color: var(--ink);
+    border-color: var(--ink-faded);
+  }
+  .roll-filters button.active {
+    background: var(--ink);
+    color: var(--paper-soft);
+    border-color: var(--ink);
+  }
+  .roll-filters button.active.fallen-active {
+    background: var(--banner);
+    border-color: var(--banner);
+  }
+
+  .roll-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    counter-reset: rcount;
+  }
+
+  .roll-letter {
+    font-family: "Old Standard TT", "PT Serif", serif;
+    font-size: clamp(36px, 5vw, 56px);
+    color: var(--banner);
+    font-weight: 700;
+    line-height: 1;
+    margin: 32px 0 8px 0;
+    padding-top: 8px;
+    border-top: 1px solid var(--banner);
+    display: inline-block;
+    padding-right: 14px;
+  }
+
+  .roll-item {
+    display: grid;
+    grid-template-columns: 38px 1fr auto;
+    gap: 16px 18px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+  }
+  .roll-item.hidden { display: none; }
+
+  .roll-num {
+    font-family: "PT Serif Caption", "PT Serif", serif;
+    font-size: 12px;
+    color: var(--ink-quiet);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    padding-top: 2px;
+  }
+
+  .roll-main {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+  }
+
+  .roll-name {
+    font-family: "Old Standard TT", "PT Serif", serif;
+    font-size: clamp(18px, 2vw, 22px);
+    line-height: 1.25;
+    color: var(--ink);
+    font-weight: 400;
+    text-decoration: none;
+    border-bottom: 1px dotted transparent;
+    transition: border-color 0.16s, color 0.16s;
+  }
+  .roll-name:hover {
+    color: var(--banner);
+    border-bottom-color: var(--banner);
+  }
+  .roll-item.fallen .roll-name { color: var(--banner); }
+  .roll-item.fallen .roll-name::before {
+    content: "†  ";
+    color: var(--banner);
+    font-weight: 400;
+  }
+  .roll-item.awarded .roll-name::before {
+    content: "★  ";
+    color: var(--gold);
+    font-size: 0.85em;
+  }
+  .roll-item.decor-awarded .roll-name::after {
+    content: "  ★";
+    color: var(--gold);
+    font-size: 0.75em;
+    vertical-align: super;
+  }
+  .roll-extra a {
+    color: var(--ink-quiet);
+    font-style: italic;
+    text-decoration: none;
+    border-bottom: 1px dotted var(--ink-quiet);
+    font-size: 13px;
+    transition: color 0.16s, border-color 0.16s;
+  }
+  .roll-extra a:hover {
+    color: var(--banner);
+    border-bottom-color: var(--banner);
+  }
+
+  .roll-meta {
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-faded);
+    line-height: 1.45;
+  }
+  .roll-meta .b { color: var(--ink-soft); }
+
+  .roll-status {
+    font-family: "PT Serif Caption", "PT Serif", serif;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+    text-align: right;
+    white-space: nowrap;
+  }
+  .roll-item.fallen .roll-status { color: var(--banner); }
+  .roll-item.awarded .roll-status { color: var(--gold); }
+
+  .roll-empty {
+    text-align: center;
+    padding: 40px 0;
+    color: var(--ink-faded);
+    font-style: italic;
+    display: none;
+  }
+  .roll-empty.visible { display: block; }
+
+  /* ──── CLOSING ───────────────────────────────────────── */
+  .closing {
+    background: var(--ink);
+    color: var(--paper-soft);
+    text-align: center;
+    padding: clamp(80px, 14vh, 180px) 24px;
+    border: none;
+    position: relative;
+  }
+  .closing::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: clamp(160px, 30%, 320px);
+    height: 4px;
+    background: var(--banner);
+  }
+
+  .closing-eyebrow {
+    font-family: "PT Serif Caption", "PT Serif", serif;
+    font-size: 12px;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: rgba(233, 223, 200, 0.55);
+    margin: 0 0 32px 0;
+  }
+
+  .closing-line {
+    font-family: "Old Standard TT", "PT Serif", serif;
+    font-style: italic;
+    font-size: clamp(28px, 4.6vw, 56px);
+    line-height: 1.25;
+    margin: 0 auto;
+    max-width: 22ch;
+    color: var(--paper-soft);
+  }
+  .closing-line strong {
+    font-style: normal;
+    font-weight: 400;
+    color: #d8a45a;
+  }
+
+  .closing-attr {
+    font-style: italic;
+    color: rgba(233, 223, 200, 0.55);
+    margin-top: 28px;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+  }
+
+  .footer-meta {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(233, 223, 200, 0.18);
+    color: rgba(233, 223, 200, 0.45);
+    font-size: 13px;
+    line-height: 1.6;
+    max-width: 60ch;
+    margin-left: auto;
+    margin-right: auto;
+    font-style: italic;
+  }
+  .footer-meta a {
+    color: #d8a45a;
+    text-decoration: underline;
+    text-decoration-color: rgba(216, 164, 90, 0.4);
+    text-underline-offset: 3px;
+  }
+  .footer-meta a:hover { text-decoration-color: #d8a45a; }
+
+  /* Reveal animation — progressive enhancement.
+     Elements are visible by default; only when JS marks the document
+     as "reveal-ready" do they start hidden and fade in. Ensures content
+     is always accessible even if JS or IO fails. */
+  .reveal-ready .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal-ready .reveal.in {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Mobile */
+  @media (max-width: 640px) {
+    body { font-size: 17px; }
+    .hero { padding: 24px 18px 22px; }
+    section { padding: 56px 18px; }
+    .topbar { font-size: 11px; gap: 10px; }
+    .roll-item {
+      grid-template-columns: 28px 1fr;
+      grid-template-rows: auto auto;
+    }
+    .roll-status {
+      grid-column: 1 / -1;
+      text-align: left;
+      padding-left: 46px;
+    }
+    .marks-grid { gap: 4px; padding: 18px; }
+    .stat { padding: 28px 16px; }
+    .years-chart { grid-template-columns: 50px 1fr 28px; gap: 3px 10px; }
+    .years-chart .yc-year { font-size: 12px; }
+    .years-chart .yc-year .age { font-size: 10px; }
+    .dedication p:first-of-type::first-letter { font-size: 3.4em; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .reveal { opacity: 1; transform: none; }
+    .yc-bar { width: var(--target-width) !important; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══ HERO ═══ -->
+<header class="hero">
+  <nav class="topbar" aria-label="Шапка">
+    <span>Книга&nbsp;Памяти · село&nbsp;Нератовка</span>
+    <a href="./index.html">tamvodopad ↗</a>
+  </nav>
+
+  <div class="hero-stage">
+    <p class="eyebrow">Великая&nbsp;Отечественная</p>
+    <h1 class="years"><span>1941</span><span class="dash">—</span><span>1945</span></h1>
+    <p class="village">Нератовка</p>
+    <p class="hero-sub">110 уроженцев села на фронтах<br/>Великой Отечественной войны</p>
+  </div>
+
+  <div class="hero-meta">
+    <span class="scroll-hint">Помним</span>
+    <span>№&nbsp;001 / 110</span>
+  </div>
+</header>
+
+<!-- ═══ DEDICATION ═══ -->
+<section class="dedication">
+  <div class="container--narrow">
+    <p class="section-mark">Слово памяти</p>
+    <p class="lead reveal">«Земля Татарии и наша Нератовка отдали войне сотни своих сыновей и дочерей. Эта страница — попытка вернуть их имена.»</p>
+
+    <p class="reveal">Село Нератовка Заинского района Татарстана — небольшое русское село на реке Зай. В первые же дни войны односельчане один за другим уходили на фронт через Заинский районный военкомат и военкоматы тех областей, где их застал июнь сорок первого. Уезжали из колхозных дворов, с заводов в Прокопьевске и Челябинске, из частей Балтийского и Северного флотов.</p>
+
+    <p class="reveal">По данным проекта «Память народа» удалось установить <strong>110 уроженцев Нератовки</strong> — участников Великой Отечественной войны. Из них <strong style="color:var(--banner);">двадцать пять</strong> не вернулись домой: погибли в боях, умерли от ран или пропали без вести. <strong style="color:var(--gold);">Девятеро</strong> удостоены боевых наград — за подвиг и личную храбрость.</p>
+
+    <p class="reveal">Мы не делим эти имена на «родившихся» и «призванных», на «нашедшихся в наградных листах» и «помянутых в Книге Памяти». Все они — нератовские. Все они шли на войну отсюда, с этой земли. И возвращались — кто живым, кто только в строчке именного списка.</p>
+
+    <div class="ornament reveal">✦ &nbsp;✦&nbsp; ✦</div>
+  </div>
+</section>
+
+<!-- ═══ STATS ═══ -->
+<section>
+  <div class="container">
+    <p class="section-mark">В цифрах</p>
+    <h2 class="section-title">Поимённо. Покрупному.</h2>
+
+    <div class="stats-grid">
+      <div class="stat reveal">
+        <p class="stat-num">110</p>
+        <p class="stat-label">Уроженцев</p>
+        <p class="stat-note">установлено в архивах</p>
+      </div>
+      <div class="stat stat--accent reveal">
+        <p class="stat-num">25</p>
+        <p class="stat-label">Не вернулись</p>
+        <p class="stat-note">погибли или пропали</p>
+      </div>
+      <div class="stat stat--gold reveal">
+        <p class="stat-num">9</p>
+        <p class="stat-label">Удостоены наград</p>
+        <p class="stat-note">за подвиг на фронте</p>
+      </div>
+      <div class="stat reveal">
+        <p class="stat-num">5</p>
+        <p class="stat-label">Ранены</p>
+        <p class="stat-note">учтены в картотеке</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MARKS ═══ -->
+<section>
+  <div class="container">
+    <p class="section-mark">Фронтовая перекличка</p>
+    <h2 class="section-title">Сто десять имён.</h2>
+    <p class="chart-sub" style="max-width:60ch;margin-bottom:0;">Каждая отметка — один уроженец Нератовки. Наведите курсор, чтобы увидеть имя.</p>
+
+    <div class="marks-wrap">
+      <div class="marks-grid" id="marks-grid" aria-label="Сетка из 110 уроженцев"></div>
+
+      <div class="marks-legend">
+        <span class="legend-item"><span class="legend-swatch legend-swatch--other"></span>Участник</span>
+        <span class="legend-item"><span class="legend-swatch legend-swatch--fallen"></span>Погиб</span>
+        <span class="legend-item"><span class="legend-swatch legend-swatch--missing"></span>Пропал без вести</span>
+        <span class="legend-item"><span class="legend-swatch legend-swatch--awarded"></span>Награждён</span>
+        <span class="legend-item"><span class="legend-swatch legend-swatch--wounded"></span>Ранен</span>
+      </div>
+    </div>
+
+    <div class="chart-block">
+      <h3 class="chart-title">Год рождения и возраст к началу войны</h3>
+      <p class="chart-sub">Самые молодые уходили на фронт в семнадцать. Год 1924-й — двенадцать человек.</p>
+      <div class="years-chart" id="years-chart" role="list"></div>
+    </div>
+
+    <div class="chart-block">
+      <h3 class="chart-title">Что известно о судьбах</h3>
+      <p class="chart-sub">Распределение по статусам в архивах «Память народа».</p>
+      <ul class="status-list" id="status-list"></ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ROLL CALL ═══ -->
+<section>
+  <div class="container">
+    <p class="section-mark">Перекличка имён</p>
+    <h2 class="section-title">Список уроженцев</h2>
+    <p class="chart-sub" style="max-width:64ch;">Полный алфавитный список. Каждое имя — ссылка на карточку героя на портале «Память народа».</p>
+
+    <div class="roll-controls">
+      <input type="search" class="roll-search" id="roll-search" placeholder="Поиск по фамилии…" aria-label="Поиск по фамилии" />
+      <div class="roll-filters" id="roll-filters" role="group" aria-label="Фильтр по статусу">
+        <button data-filter="all" class="active">Все</button>
+        <button data-filter="fallen">Погибшие</button>
+        <button data-filter="awarded">Награждённые</button>
+        <button data-filter="wounded">Ранены</button>
+      </div>
+    </div>
+
+    <ul class="roll-list" id="roll-list"></ul>
+    <p class="roll-empty" id="roll-empty">По вашему запросу ничего не найдено.</p>
+  </div>
+</section>
+
+<!-- ═══ CLOSING ═══ -->
+<section class="closing">
+  <p class="closing-eyebrow">Девятое мая</p>
+  <p class="closing-line">
+    <strong>Никто не забыт,</strong><br/>
+    ничто не забыто.
+  </p>
+  <p class="closing-attr">Ольга Берггольц, 1959</p>
+
+  <p class="footer-meta">
+    Данные собраны из открытого архива <a href="https://pamyat-naroda.ru" target="_blank" rel="noopener noreferrer">«Память народа»</a> Министерства обороны РФ. Если вы знаете уроженца Нератовки, чьё имя не попало в этот список, или у вас есть фотография, документы, воспоминания о ком-то из перечисленных — напишите мне в <a href="https://t.me/tamvodopad" target="_blank" rel="noopener noreferrer">Telegram</a>. Имена и судьбы будут добавлены.
+  </p>
+</section>
+
+</main>
+
+<div class="mark-tip" id="tip" role="tooltip"></div>
+
+<script id="data" type="application/json">
+[{"n":"Анисимов Леонид Степанович","y":"1915","b":"г. Казань, Заинский р-н, с. Нератовка","s":"389 сд, Меджибожский РВК, Украинская ССР, Каменец-Подольская обл., Меджибожский р-н","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero121254689/","aw":false,"el":[]},{"n":"Аракчеев Александр Тимофеевич","y":"1925","b":"д. Нерхтевка","s":"Заинский РВК, Татарская АССР, Заинский р-н","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero46753769/","aw":false,"el":[]},{"n":"Баландин Василий Петрович","y":"1906","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"1162 сп, Заинский РВК, Татарская АССР, Заинский р-н, 1162 сп 352 сд","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero121814880/","aw":false,"el":[]},{"n":"Ванкрухин Степан Акимович","y":"1924","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"Акташский РВК, Татарская АССР, Акташский р-н, 40 оадн ОМ 3 акп","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero99879507/","aw":false,"el":[]},{"n":"Ванюрихин Аким Федорович","y":"1902","b":"Татарская АССР, Заинский р-н, д.Нератовка","s":"Акташский РВК, Татарская АССР, Акташский р-н","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero109022493/","aw":false,"el":[]},{"n":"Ванюрихин Василий Агапович","y":"1903","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"201 самоходный тп","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero109058942/","aw":false,"el":[]},{"n":"Ванюрихин Василий Дмитриевич","y":"1922","b":"с. Нератовка. Печатная Книга Памяти","s":"","t":"Погиб","l":"https://pamyat-naroda.ru/heroes/memorial-chelovek_pechatnoi_knigi_pamyati410196902/","aw":false,"el":[]},{"n":"Ванюрихин Василий Яковлевич","y":"1926","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"19.02.1945 Орджоникидзевский РВК, Молотовская обл., г. Молотов, Орджоникидзевский р-н, Орджоникидзевский РВК","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero109026380/","aw":false,"el":[]},{"n":"Ванюрихин Емельян Николаевич","y":"1913","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"Биюк-Онларский РВК, Крымская АССР, Биюк-Онларский р-н","t":"Призван (РВК)","l":"https://pamyat-naroda.ru/heroes/rvk-chelovek_voenkomat41966335/","aw":false,"el":[]},{"n":"Ванюрихин Иван Кириллович","y":"1927","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"Ново-Шешминский РВК, Татарская АССР, Ново-Шешминский р-н","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero99989448/","aw":false,"el":[]},{"n":"Ванюрихин Иван Федорович","y":"1905","b":"Татарская АССР, с. Нератовка","s":"Заинский РВК, Татарская АССР, Заинский р-н","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero109026888/","aw":false,"el":[]},{"n":"Ванюрихин Павел Федорович","y":"1916","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"640 стрелковый полк,стрелок","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero79982809/","aw":false,"el":[]},{"n":"Ванюрихин Петр Николаевич","y":"1921","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"Кипчакский РВК, Узбекская ССР, Кара-Калпакская АССР, Кипчакский р-н, 321 сд 2 Уд. А","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero92311513/","aw":false,"el":[{"l":"https://pamyat-naroda.ru/heroes/person-hero91464705/","t":"Неизвестен"}]},{"n":"Воробьев Яков Егорович","y":"1901","b":"Tатарская АССР, Заинский р-н, с. Нератовка","s":"Шереметьевский РВК, Татарская АССР, Шереметьевский р-н","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero105346259/","aw":false,"el":[]},{"n":"Гусев Василий Ксенофонтович","y":"1924","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"584 сп, Заинский РВК, Татарская АССР, Заинский р-н, 2 отдельная Сталинская бригада 184 стрелковый полк 20 армия","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero99848991/","aw":false,"el":[]},{"n":"Гусев Иван Ефимович","y":"1918","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"21 ОПР-ССБО. Картотека моряков","t":"Моряк","l":"https://pamyat-naroda.ru/heroes/kld-card_vmf6379952/","aw":false,"el":[]},{"n":"Гусев Михаил Ильич","y":"","b":"Татарская АССР, с. Нератовка. Печатная Книга Памяти","s":"","t":"Погиб","l":"https://pamyat-naroda.ru/heroes/memorial-chelovek_pechatnoi_knigi_pamyati407865036/","aw":false,"el":[]},{"n":"Гусев Сергей Васильевич","y":"1925","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"Заинский РВК, Татарская АССР, Заинский р-н","t":"Награждён","l":"https://pamyat-naroda.ru/heroes/podvig-chelovek_yubileinaya_kartoteka1514469670/","aw":false,"el":[{"l":"https://pamyat-naroda.ru/heroes/person-hero40650327/","t":"Неизвестен"}]},{"n":"Гусев Федор Михайлович","y":"1907","b":"Татарская АССР, Чистопольская обл., Заинский р-н, с. Нератовка","s":"Златоустовский ГВК, Челябинская обл., г. Златоуст, 3 зап. Именные списки частей","t":"В именных списках","l":"https://pamyat-naroda.ru/heroes/isp-chelovek_spisok17869290/","aw":false,"el":[{"l":"https://pamyat-naroda.ru/heroes/person-hero21217553/","t":"Неизвестен"}]},{"n":"Дегтев Владимир Кириллович","y":"","b":"Татарская АССР, с. Нератовка. Печатная Книга Памяти","s":"","t":"Погиб","l":"https://pamyat-naroda.ru/heroes/memorial-chelovek_pechatnoi_knigi_pamyati407865074/","aw":false,"el":[]},{"n":"Демьянов Иван Петрович","y":"1904","b":"Уфимская обл., Зайнский р-н, д. Нератовка","s":"74 сп 384 сд СЗФ","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero82590541/","aw":false,"el":[]},{"n":"Демьянов Кузьма Петрович","y":"1905","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"707 сп 215 сд (II), Чусовской ГВК, Молотовская обл., г. Чусовой, 707 сп 215 сд КалФ","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero81228699/","aw":false,"el":[]},{"n":"Демьянов Николай Иванович.","y":"1919","b":"Татарская АССР, Заинский р-н, с. Нератовка","s":"","t":"Награждён","l":"https://pamyat-naroda.ru/heroes/podvig-chelovek_yubileinaya_kartoteka1520250883/","aw":false,"el":[]},{"n":"Демьянов Федор Михайлович","y":"1910","b":"Татарская АССР, Заинский р-н, с. Нератовка","s":"898 сп 245 сд","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero126015427/","aw":false,"el":[]},{"n":"Дмитриев Михаил Семенович","y":"1910","b":"Татарская АССР, Заинский р-н, с. Нератовка","s":"Шереметьевский РВК, Татарская АССР, Шереметьевский р-н","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero105382361/","aw":false,"el":[]},{"n":"Егоров Александр Николаевич","y":"1910","b":"Татарская АССР, Заинский р-н, д. Нератовка. Сводная картотека","s":"","t":"Погиб","l":"https://pamyat-naroda.ru/heroes/memorial-chelovek_kartoteka_memorial79225382/","aw":false,"el":[]},{"n":"Егоров Кузьма Андреевич","y":"1901","b":"с. Нератовка","s":"01.10.1941 Заинский РВК, Татарская АССР, Заинский р-н, 1162 сп 352 сд","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero103951498/","aw":false,"el":[]},{"n":"Емельянов Евдоким Михайлович","y":"1906","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"16 гв. сп, 23.07.1941 Прокопьевский ГВК, Кемеровская обл., г. Прокопьевск, 877 оавтоб 3 гв. адп РГК","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero108481688/","aw":false,"el":[]},{"n":"Емельянов Егор Федорович","y":"1923","b":"Татарская АССР, д. Нератовка","s":"Прокопьевский РВК, Кемеровская обл., Прокопьевский р-н, 29 гв. минбр","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero82280316/","aw":false,"el":[]},{"n":"Епиргин Яков Фомич","y":"1924","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"113 сп. Картотека ранений","t":"Ранен","l":"https://pamyat-naroda.ru/heroes/kld-card_ran74265448/","aw":false,"el":[]},{"n":"Ермолаев Александр Сергеевич","y":"","b":"С. Нератовка. Печатная Книга Памяти","s":"","t":"Погиб","l":"https://pamyat-naroda.ru/heroes/memorial-chelovek_pechatnoi_knigi_pamyati407865261/","aw":false,"el":[]},{"n":"Ермолаев Иван Степанович","y":"1904","b":"с. Нератовка","s":"Tаинский РВК, Татарская АССР, Заинский р-н","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero103960234/","aw":false,"el":[]},{"n":"Ермолаев Илья Романович","y":"1924","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero97144829/","aw":false,"el":[]},{"n":"Ершов Василий Авельянович","y":"","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"70 мбр","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero35037468/","aw":false,"el":[]},{"n":"Ершов Николай Аксентьевич","y":"1915","b":"Татарская АССР, Чистопольская обл., Заинский р-н, д. Нератовка","s":"ЛенФ","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero92645949/","aw":false,"el":[]},{"n":"Ершов Николай Михайлович","y":"","b":"Татарская АССР, с. Нератовка. Печатная Книга Памяти","s":"","t":"Погиб","l":"https://pamyat-naroda.ru/heroes/memorial-chelovek_pechatnoi_knigi_pamyati407865300/","aw":false,"el":[]},{"n":"Ершов Петр Барисович","y":"1922","b":"Татарская АССР, Заинский р-н, с. Нератовка","s":"Заинский РВК, Татарская АССР, Заинский р-н, 43 сд 55 А. Именные списки частей","t":"В именных списках","l":"https://pamyat-naroda.ru/heroes/isp-chelovek_spisok14849106/","aw":false,"el":[]},{"n":"Ершов Сергей Аксентьевич","y":"1921","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero48235825/","aw":false,"el":[]},{"n":"Зубрилов Иван Гордеевич","y":"1910","b":"Татарская АССР, Заинский р-н, д.Нератовка","s":"","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero31415145/","aw":false,"el":[]},{"n":"Зубрилов Илья Емельянович","y":"1924","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"274 сп. Картотека ранений","t":"Ранен","l":"https://pamyat-naroda.ru/heroes/kld-card_ran68622827/","aw":false,"el":[]},{"n":"Зубрилов Илья Емельяновна","y":"1920","b":"Татарская АССР, Заинский р-н, с. Нератовка","s":"1074 сп 314 сд. Картотека ранений","t":"Ранен","l":"https://pamyat-naroda.ru/heroes/kld-card_ran68622821/","aw":false,"el":[]},{"n":"Зубрилов Илья Семенович","y":"1924","b":"Татарская АССР, Заинский р-н, с. Нератовка","s":"1074 сп 314 сд. Картотека ранений","t":"Ранен","l":"https://pamyat-naroda.ru/heroes/kld-card_ran68622836/","aw":false,"el":[]},{"n":"Зубрилов Михаил Гордеевич","y":"1921","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"81 оазд","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero123510490/","aw":false,"el":[{"l":"https://pamyat-naroda.ru/heroes/person-hero81166361/","t":"Неизвестен"}]},{"n":"Карсаков Михаил Васильевич","y":"1921","b":"Татарская АССР, Заинский р-н, с. Нератовка. УПК","s":"","t":"Офицер (УПК)","l":"https://pamyat-naroda.ru/heroes/kld-card_uchet_officer13528636/","aw":false,"el":[]},{"n":"Карягин Александр Дмитриевич","y":"1923","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"Заинский РВК, Татарская АССР, Заинский р-н, 754 сп 209 сд 17 А ЗабФ","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero76175000/","aw":false,"el":[]},{"n":"Кашиков Иван Степанович","y":"1904","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"__.08.1942 Чистопольский РВК, Татарская АССР","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero105501524/","aw":false,"el":[]},{"n":"Кирюшонков Николай Александрович","y":"1916","b":"Татарская АССР, Заинский р-н, с. Нератовка","s":"Шереметьевский РВК, Татарская АССР, Шереметьевский р-н. Печатная Книга Памяти","t":"Погиб","l":"https://pamyat-naroda.ru/heroes/memorial-chelovek_pechatnoi_knigi_pamyati407938860/","aw":false,"el":[]},{"n":"Кондратьев Александр Тимофеевич","y":"1924","b":"Татарская АССР, Заинский р-н, с. Нератовка","s":"Заинский РВК, Татарская АССР, Заинский р-н, 9 зенап ЛВМБ КБФ. Именные списки частей","t":"В именных списках","l":"https://pamyat-naroda.ru/heroes/isp-chelovek_spisok16968905/","aw":false,"el":[{"l":"https://pamyat-naroda.ru/heroes/isp-chelovek_spisok16968186/","t":"В именных списках"}]},{"n":"Кондратьев Алексей Тимофеевич","y":"1903","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"__.__.1941 Заинский РВК, Татарская АССР, Заинский р-н","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero105525609/","aw":false,"el":[]},{"n":"Кондратьев Василий Алексеевич","y":"1923","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"Заинский РВК, Татарская АССР, Заинский р-н, 59 гв. тбр 8 гв. тк","t":"Награждён","l":"https://pamyat-naroda.ru/heroes/podvig-chelovek_yubileinaya_kartoteka1523480630/","aw":false,"el":[{"l":"https://pamyat-naroda.ru/heroes/person-hero81986917/","t":"Неизвестен"}]},{"n":"Кондратьев Василий Николаевич","y":"1921","b":"Татарская АССР, с. Нератовка","s":"Заинский РВК, Татарская АССР, Заинский р-н. Печатная Книга Памяти","t":"Погиб","l":"https://pamyat-naroda.ru/heroes/memorial-chelovek_pechatnoi_knigi_pamyati407866243/","aw":false,"el":[]},{"n":"Кондратьев Иван Никитович","y":"1927","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"Заинский РВК, Татарская АССР, Заинский р-н","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero107471253/","aw":false,"el":[]},{"n":"Кондратьев Илья Никитович","y":"1911","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"151 гв. сп, Заинский РВК, Татарская АССР, Заинский р-н","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero105526607/","aw":false,"el":[]},{"n":"Кондратьев Максим Васильевич","y":"1924","b":"Татарская АССР, Заинский р-н, д. Нератовка (д. Неротовка)","s":"Заинский РВК, Татарская АССР, Заинский р-н, 1 озадн. Именные списки частей","t":"В именных списках","l":"https://pamyat-naroda.ru/heroes/isp-chelovek_spisok15689480/","aw":false,"el":[{"l":"https://pamyat-naroda.ru/heroes/person-hero85422172/","t":"Неизвестен"}]},{"n":"Кондратьев Михаил Акимович","y":"1917","b":"Татарская АССР, Заинский р-н, д. Нератовка. УПК","s":"","t":"Офицер (УПК)","l":"https://pamyat-naroda.ru/heroes/kld-card_uchet_officer12052574/","aw":false,"el":[]},{"n":"Кондратьев Михаил Васильевич","y":"1919","b":"Татарская АССР, с. Нератовка","s":"Апастовский РВК, Татарская АССР, Апастовский р-н","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero105526676/","aw":false,"el":[]},{"n":"Кондратьев Павел Иннокентьевич","y":"1910","b":"Татарская АССР, Заинский р-н, с. Нератовка","s":"Карымский РВК, Читинская обл., Карымский р-н. Печатная Книга Памяти","t":"Погиб","l":"https://pamyat-naroda.ru/heroes/memorial-chelovek_pechatnoi_knigi_pamyati410174402/","aw":false,"el":[]},{"n":"Кондратьев Перфил Семенович.","y":"1918","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"","t":"Награждён","l":"https://pamyat-naroda.ru/heroes/podvig-chelovek_yubileinaya_kartoteka1523485263/","aw":false,"el":[]},{"n":"Кондратьев Петр Гаврилович","y":"1914","b":"с. Нератовка","s":"Tаинский ГВК. Печатная Книга Памяти","t":"Погиб","l":"https://pamyat-naroda.ru/heroes/memorial-chelovek_pechatnoi_knigi_pamyati407866254/","aw":false,"el":[]},{"n":"Кондратьев Петр Никитич","y":"1894","b":"Татарская АССР, Казанская обл., Заинский р-н, д. Нератовка","s":"25.07.1941 Заинский РВК, Татарская АССР, Заинский р-н. ВПП и ЗП","t":"Пропал без вести","l":"https://pamyat-naroda.ru/heroes/memorial-chelovek_vpp22530933/","aw":false,"el":[{"l":"https://pamyat-naroda.ru/heroes/memorial-chelovek_vpp1992072593/","t":"Пропал без вести"}]},{"n":"Кондратьев Семен Семенович","y":"1916","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"1048 сп, Заинский РВК, Татарская АССР, Заинский р-н, 1048 сп","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero105526898/","aw":false,"el":[]},{"n":"Кондратьев Сергей Васильевич","y":"","b":"С. Нератовка. Печатная Книга Памяти","s":"","t":"Погиб","l":"https://pamyat-naroda.ru/heroes/memorial-chelovek_pechatnoi_knigi_pamyati407866257/","aw":false,"el":[]},{"n":"Кондратьев Яков Тимофеевич","y":"1907","b":"д. Нератовка","s":"Заинский РВК, Татарская АССР, Заинский р-н","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero105529283/","aw":false,"el":[]},{"n":"Кондратьева Екатерина Филимоновна","y":"1924","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"2 гв. вдд, __.__.1943 Бугульминский РВК, Татарская АССР, Бугульминский р-н. Картотека ранений","t":"Ранен","l":"https://pamyat-naroda.ru/heroes/kld-card_ran95602702/","aw":false,"el":[]},{"n":"Константинов Глеб Григорьевич","y":"","b":"Татарская АССР, с. Нератовка","s":"Заинский РВК, Татарская АССР, Заинский р-н. Печатная Книга Памяти","t":"Погиб","l":"https://pamyat-naroda.ru/heroes/memorial-chelovek_pechatnoi_knigi_pamyati407866276/","aw":false,"el":[]},{"n":"Корягин Дмитрий Еремеевич","y":"1900","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"Tаинский РВК, Татарская АССР, Заинский р-н. Печатная Книга Памяти","t":"Погиб","l":"https://pamyat-naroda.ru/heroes/memorial-chelovek_pechatnoi_knigi_pamyati407866332/","aw":false,"el":[{"l":"https://pamyat-naroda.ru/heroes/person-hero124525076/","t":"Неизвестен"}]},{"n":"Корягин Роман Ефремович","y":"1898","b":"Татарская АССР, Заинский р-н, с. Нератовка","s":"Шереметьевский РВК, Татарская АССР, Шереметьевский р-н. Печатная Книга Памяти","t":"Погиб","l":"https://pamyat-naroda.ru/heroes/memorial-chelovek_pechatnoi_knigi_pamyati407939088/","aw":false,"el":[]},{"n":"Кузнецова Анастасия Васильевна.","y":"1923","b":"Татарская АССР, Заинский р-н, с. Нератовка","s":"","t":"Награждён","l":"https://pamyat-naroda.ru/heroes/podvig-chelovek_yubileinaya_kartoteka1523688274/","aw":false,"el":[]},{"n":"Кузьмичев Филипп Ефремович","y":"","b":"С. Нератовка. Печатная Книга Памяти","s":"","t":"Погиб","l":"https://pamyat-naroda.ru/heroes/memorial-chelovek_pechatnoi_knigi_pamyati407866523/","aw":false,"el":[]},{"n":"Маковский Виталий Герасимович","y":"1893","b":"Минская обл., Дзержинский р-н, д. Нератовка","s":"","t":"Пропал без вести","l":"https://pamyat-naroda.ru/heroes/memorial-chelovek_vpp1996946954/","aw":false,"el":[]},{"n":"Медведев Владимир Федорович","y":"1924","b":"Татарская АССР, с. Нератовка","s":"Заинский РВК, Татарская АССР, Заинский р-н","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero105602591/","aw":false,"el":[]},{"n":"Медведев Федор Александрович","y":"1903","b":"Татарская АССР, с. Нератовка","s":"Заинский РВК, Татарская АССР, Заинский р-н","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero105603971/","aw":false,"el":[]},{"n":"Меркурьев Василий Яковлевич","y":"1919","b":"Татарская АССР, Нижне-Камский р-н, д. Нератовка","s":"Каменский РВК, Челябинская обл., Каменский р-н, 131 оро 5 гв. ТА","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero75499948/","aw":false,"el":[]},{"n":"Никитин Евдоким Иванович","y":"1922","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"116 гв. сп 40 сд 1 БелФ","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero80014018/","aw":false,"el":[]},{"n":"Никитин Иван Николаевич","y":"1925","b":"д. Нератовка","s":"Заинский РВК, Татарская АССР, Заинский р-н","t":"Призван (РВК)","l":"https://pamyat-naroda.ru/heroes/rvk-chelovek_voenkomat12932203/","aw":false,"el":[]},{"n":"Спирчин Александр Кузьмич","y":"1919","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"222 пп, Челно-Вершинский РВК, Куйбышевская обл., Челно-Вершинский р-н","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero124632997/","aw":false,"el":[]},{"n":"Спирчин Владимир Михеевич.","y":"1923","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"","t":"Награждён","l":"https://pamyat-naroda.ru/heroes/podvig-chelovek_yubileinaya_kartoteka1113151862/","aw":false,"el":[]},{"n":"Спирчин Иван Николаевич","y":"1919","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"603 ап 13 А, __.__.1941 Заинский РВК, Татарская АССР, Заинский р-н","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero42587467/","aw":false,"el":[]},{"n":"Спирчин Илья Николаевич","y":"1907","b":"Татарская АССР, Заинский р-н, д. Нератовка. Сводная картотека","s":"__.__.1942","t":"Погиб","l":"https://pamyat-naroda.ru/heroes/memorial-chelovek_kartoteka_memorial79710344/","aw":false,"el":[{"l":"https://pamyat-naroda.ru/heroes/person-hero42890938/","t":"Неизвестен"}]},{"n":"Спирчин Яков Фомич","y":"1904","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"113 сп, Заинский РВК, Татарская АССР, Заинский р-н, 608 сп","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero122571881/","aw":false,"el":[]},{"n":"Сухов Александр Афанасьевич","y":"1910","b":"Татарская АССР, Заинский р-н, с. Нератовка. Сводная картотека","s":"","t":"Погиб","l":"https://pamyat-naroda.ru/heroes/memorial-chelovek_kartoteka_memorial78955563/","aw":false,"el":[]},{"n":"Сухов Василий Егорович","y":"1911","b":"Татарская АССР, Заинский р-н, с. Нератовка. Сводная картотека","s":"","t":"Погиб","l":"https://pamyat-naroda.ru/heroes/memorial-chelovek_kartoteka_memorial78955565/","aw":false,"el":[]},{"n":"Сухов Илья Эрастович","y":"1901","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"Заинский РВК, Татарская АССР, Заинский р-н, 250 сп 82 сд. Именные списки частей","t":"В именных списках","l":"https://pamyat-naroda.ru/heroes/isp-chelovek_spisok6535602/","aw":false,"el":[{"l":"https://pamyat-naroda.ru/heroes/person-hero102592862/","t":"Неизвестен"}]},{"n":"Тихонов Михаил Ильич","y":"1910","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"п/п 28616, Заинский РВК, Татарская АССР, Заинский р-н","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero105764051/","aw":false,"el":[]},{"n":"Трандина Анна Михеевна","y":"1923","b":"Молотовская обл., Куединский р-н, д. Нератовка","s":"935 бао, Куединский РВК, Молотовская обл., Куединский р-н, 27 уч. автоп","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero125357878/","aw":false,"el":[]},{"n":"Филиппов Василий Кузьмич","y":"1922","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"Тракторозаводский РВК, Челябинская обл., г. Челябинск, Тракторозаводский р-н, 399 гв. тсап БТ и МВ 47 А","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero37907781/","aw":false,"el":[]},{"n":"Филиппов Михаил Иванович.","y":"1913","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"","t":"Награждён","l":"https://pamyat-naroda.ru/heroes/podvig-chelovek_yubileinaya_kartoteka1515869765/","aw":false,"el":[]},{"n":"Филиппов Михаил Кузьмич","y":"","b":"Татарская АССР, с. Нератовка. Печатная Книга Памяти","s":"","t":"Погиб","l":"https://pamyat-naroda.ru/heroes/memorial-chelovek_pechatnoi_knigi_pamyati407869277/","aw":false,"el":[]},{"n":"Филиппов Яков Максимович","y":"1915","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"Ново-Шешминский РВК, Татарская АССР, Ново-Шешминский р-н, 43 гв. сп 16 гв. сд. Именные списки частей","t":"Награждён","l":"https://pamyat-naroda.ru/heroes/podvig-chelovek_yubileinaya_kartoteka1515874827/","aw":false,"el":[{"l":"https://pamyat-naroda.ru/heroes/isp-chelovek_spisok407011/","t":"В именных списках"}]},{"n":"Фунтиков","y":"","b":"Д. Нератовка Пензенская обл.. Печатная Книга Памяти","s":"","t":"Погиб","l":"https://pamyat-naroda.ru/heroes/memorial-chelovek_pechatnoi_knigi_pamyati1052397403/","aw":false,"el":[]},{"n":"Хакимов Шамхислат","y":"1927","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"Заинский РВК, Татарская АССР, Заинский р-н","t":"Призван (РВК)","l":"https://pamyat-naroda.ru/heroes/rvk-chelovek_voenkomat12991656/","aw":false,"el":[]},{"n":"Чарикова Капитолина Васильевна.","y":"1920","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"","t":"Награждён","l":"https://pamyat-naroda.ru/heroes/podvig-chelovek_yubileinaya_kartoteka1521542050/","aw":false,"el":[]},{"n":"Ширшов Михаил Евсеевич","y":"1899","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"п/п 98684, Заинский РВК, Татарская АССР, Заинский р-н","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero103956060/","aw":false,"el":[]},{"n":"Ширшов Михаил Порфирьевич","y":"1925","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"Заинский РВК, Татарская АССР, Заинский р-н","t":"Призван (РВК)","l":"https://pamyat-naroda.ru/heroes/rvk-chelovek_voenkomat32554485/","aw":false,"el":[]},{"n":"Ширшов Семен Евтеевич","y":"1905","b":"Татарская АССР, с. Нератовка","s":"31.08.1941 Заинский РВК, Татарская АССР, Заинский р-н","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero105676368/","aw":false,"el":[]},{"n":"Ширшов Семен Иванович","y":"1927","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"Заинский РВК, Татарская АССР, Заинский р-н","t":"Призван (РВК)","l":"https://pamyat-naroda.ru/heroes/rvk-chelovek_voenkomat12991768/","aw":false,"el":[]},{"n":"Ширяев Павел Александрович","y":"1907","b":"д. Нератовка","s":"641 сп, 641 сп","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero44364739/","aw":false,"el":[]},{"n":"Шишкин Василий Нестерович","y":"1895","b":"Татарская АССР, Казанская обл., Заинский р-н, д. Нератовка","s":"команда 200, Заинский РВК, Татарская АССР, Заинский р-н","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero123192483/","aw":false,"el":[]},{"n":"Шишкин Григорий Герасимович","y":"1906","b":"Татарская АССР, с. Нератовка","s":"Заинский РВК, Татарская АССР, Заинский р-н","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero124433853/","aw":false,"el":[]},{"n":"Шишкин Иван Степанович","y":"1923","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"160 сп, __.__.1941 Заинский РВК, Татарская АССР, Заинский р-н, 891 сп 189 сд","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero122310542/","aw":false,"el":[]},{"n":"Шишкин Иван Филипович","y":"1921","b":"Татарская АССР, Заинский р-н, с. Нератовка","s":"85 гв.сп, 85 гв. сп","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero120456171/","aw":false,"el":[]},{"n":"Шишкин Михаил Прокофьевич","y":"1909","b":"Татарская АССР, Заинский р-н, с. Нератовка. Сводная картотека","s":"6 сп. Сводная картотека","t":"Погиб","l":"https://pamyat-naroda.ru/heroes/memorial-chelovek_kartoteka_memorial79716833/","aw":false,"el":[{"l":"https://pamyat-naroda.ru/heroes/memorial-chelovek_kartoteka_memorial79307634/","t":"Погиб"}]},{"n":"Шишкин Никита Нестерович","y":"1901","b":"с. Нератовка","s":"Tаинский РВК, Татарская АССР, Заинский р-н. Печатная Книга Памяти","t":"Погиб","l":"https://pamyat-naroda.ru/heroes/memorial-chelovek_pechatnoi_knigi_pamyati407870113/","aw":false,"el":[]},{"n":"Шишкин Николай Федорович","y":"1917","b":"Татарская АССР, Заинский р-н, д. Нератовка. Призыв и демобилизация","s":"57 одсб, 05.04.1943 Заинский РВК, Татарская АССР, Заинский р-н, 57 одсб","t":"Призван (РВК)","l":"https://pamyat-naroda.ru/heroes/rvk-chelovek_voenkomat446337/","aw":false,"el":[{"l":"https://pamyat-naroda.ru/heroes/person-hero123742205/","t":"Неизвестен"}]},{"n":"Шишкин Семен Елисеевич","y":"1909","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"888 сп","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero34077720/","aw":false,"el":[]},{"n":"Шишкин Федор Елисеевич","y":"1916","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"646 строит. раб. колонна, Челнинский РВК, Татарская АССР, Челнинский р-н","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero44647014/","aw":false,"el":[]},{"n":"Шишкин Филипп Прокопьевич","y":"1902","b":"Татарская АССР, с. Нератовка","s":"Заинский РВК, Татарская АССР, Заинский р-н","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero105678764/","aw":false,"el":[]},{"n":"Щекотуров Василий Дмитриевич","y":"1917","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"24.09.1943 Хорольский РВК, Украинская ССР, Полтавская обл., Хорольский р-н","t":"Погиб/Пропал","l":"https://pamyat-naroda.ru/heroes/memorial-chelovek_dopolnitelnoe_donesenie71928753/","aw":false,"el":[]},{"n":"Щекотуров Петр Дмитриевич","y":"1919","b":"Татарская АССР, Заинский р-н, д. Нератовка","s":"","t":"Неизвестен","l":"https://pamyat-naroda.ru/heroes/person-hero34123273/","aw":false,"el":[]},{"n":"Щекотуров Степан Дмитриевич","y":"1913","b":"Татарская АССР, Чистопольская обл., Заинский р-н, с. Нератовка","s":"Троицко-Печорский РВК, Коми АССР, Троицко-Печорский р-н, 1356 зенап 25 зенад РГК","t":"В именных списках","l":"https://pamyat-naroda.ru/heroes/isp-chelovek_spisok18573940/","aw":false,"el":[{"l":"https://pamyat-naroda.ru/heroes/person-hero80502494/","t":"Неизвестен"},{"l":"https://pamyat-naroda.ru/heroes/person-hero97024056/","t":"Неизвестен"}]}]
+</script>
+
+<script>
+(() => {
+  const data = JSON.parse(document.getElementById('data').textContent);
+
+  const STATUS = {
+    fallen: ['Погиб', 'Погиб/Пропал'],
+    missing: ['Пропал без вести'],
+    awarded: ['Награждён'],
+    wounded: ['Ранен'],
+  };
+
+  function classify(t) {
+    if (STATUS.fallen.includes(t)) return 'fallen';
+    if (STATUS.missing.includes(t)) return 'missing';
+    if (STATUS.awarded.includes(t)) return 'awarded';
+    if (STATUS.wounded.includes(t)) return 'wounded';
+    return 'other';
+  }
+
+  // ── Marks grid (126) ────────────────────────────────
+  const grid = document.getElementById('marks-grid');
+  const tip = document.getElementById('tip');
+  const fragment = document.createDocumentFragment();
+  data.forEach((d, i) => {
+    const cls = classify(d.t);
+    const m = document.createElement('div');
+    m.className = `mark mark--${cls}`;
+    m.dataset.idx = i;
+    m.setAttribute('role', 'img');
+    m.setAttribute('aria-label', `${d.n}, ${d.y || 'год неизвестен'}, ${d.t}`);
+    fragment.appendChild(m);
+  });
+  grid.appendChild(fragment);
+
+  function showTip(e) {
+    const m = e.target.closest('.mark');
+    if (!m) return;
+    const d = data[m.dataset.idx];
+    tip.innerHTML = `${d.n} <em>· ${d.y || 'год неизв.'} · ${d.t}</em>`;
+    const r = m.getBoundingClientRect();
+    tip.style.left = (r.left + r.width / 2) + 'px';
+    tip.style.top = r.top + 'px';
+    tip.classList.add('visible');
+  }
+  function hideTip() { tip.classList.remove('visible'); }
+  grid.addEventListener('mouseover', showTip);
+  grid.addEventListener('mouseout', hideTip);
+  grid.addEventListener('focusin', showTip);
+  grid.addEventListener('focusout', hideTip);
+
+  // ── Years chart ─────────────────────────────────────
+  const yearCounts = {};
+  data.forEach(d => {
+    const y = parseInt(d.y, 10);
+    if (!isNaN(y)) yearCounts[y] = (yearCounts[y] || 0) + 1;
+  });
+  const years = Object.keys(yearCounts).map(Number).sort();
+  const maxCount = Math.max(...Object.values(yearCounts));
+  const yc = document.getElementById('years-chart');
+  years.forEach(y => {
+    const count = yearCounts[y];
+    const age = 1941 - y;
+    const young = age <= 22;
+    const youngest = age <= 18;
+
+    const yLabel = document.createElement('div');
+    yLabel.className = 'yc-year';
+    yLabel.innerHTML = `<strong>${y}</strong><span class="age">${age} лет</span>`;
+    yc.appendChild(yLabel);
+
+    const bar = document.createElement('div');
+    bar.className = 'yc-bar' + (youngest ? ' youngest' : young ? ' young' : '');
+    const targetW = (count / maxCount * 100) + '%';
+    bar.style.setProperty('--target-width', targetW);
+    yc.appendChild(bar);
+
+    const c = document.createElement('div');
+    c.className = 'yc-count';
+    c.textContent = count;
+    yc.appendChild(c);
+
+    // animate when visible
+    requestAnimationFrame(() => {
+      setTimeout(() => { bar.style.width = targetW; }, 60);
+    });
+  });
+
+  // ── Status distribution ─────────────────────────────
+  const statusCounts = {};
+  data.forEach(d => statusCounts[d.t] = (statusCounts[d.t] || 0) + 1);
+  const statusOrder = [
+    ['Погиб', 'fallen'],
+    ['Пропал без вести', 'fallen'],
+    ['Погиб/Пропал', 'fallen'],
+    ['Награждён', 'awarded'],
+    ['Ранен', ''],
+    ['В именных списках', ''],
+    ['Призван (РВК)', ''],
+    ['Офицер (УПК)', ''],
+    ['Моряк', ''],
+    ['Неизвестен', ''],
+  ];
+  const total = data.length;
+  const sl = document.getElementById('status-list');
+  statusOrder.forEach(([label, cls]) => {
+    const count = statusCounts[label] || 0;
+    if (!count) return;
+    const li = document.createElement('li');
+    if (cls) li.className = cls;
+    const w = (count / total * 100).toFixed(1) + '%';
+    li.innerHTML = `
+      <span class="status-name">${label}</span>
+      <span class="status-bar" style="--w:${w}"></span>
+      <span class="status-count">${count}</span>
+    `;
+    sl.appendChild(li);
+  });
+
+  // ── Roll call ───────────────────────────────────────
+  const rl = document.getElementById('roll-list');
+  const rlEmpty = document.getElementById('roll-empty');
+  let lastLetter = '';
+  data.forEach((d, i) => {
+    const letter = (d.n || '?')[0].toUpperCase();
+    if (letter !== lastLetter) {
+      const lh = document.createElement('li');
+      lh.className = 'roll-letter-wrap';
+      lh.innerHTML = `<div class="roll-letter">${letter}</div>`;
+      rl.appendChild(lh);
+      lastLetter = letter;
+    }
+    const cls = classify(d.t);
+    const li = document.createElement('li');
+    // If primary status isn't 'awarded' but the merge contains an award record,
+    // surface gold star alongside the main classification.
+    const decorAwarded = d.aw && cls !== 'awarded';
+    li.className = `roll-item ${cls}${decorAwarded ? ' decor-awarded' : ''}`;
+    li.dataset.cls = cls;
+    li.dataset.name = d.n.toLowerCase();
+
+    const birth = (d.b || '').replace(/\.\s*Печатная Книга Памяти/, '').replace(/\.\s*Сводная картотека/, '').replace(/\.\s*УПК$/, '').replace(/\.\s*Призыв и демобилизация/, '');
+
+    const extraLinks = (d.el && d.el.length)
+      ? `<span class="roll-extra"> · ${d.el.map((e, n) => `<a href="${e.l}" target="_blank" rel="noopener noreferrer" title="${e.t}">ещё карточка${d.el.length > 1 ? ' ' + (n + 1) : ''}</a>`).join(', ')}</span>`
+      : '';
+
+    li.innerHTML = `
+      <span class="roll-num">${String(i + 1).padStart(3, '0')}</span>
+      <div class="roll-main">
+        <a class="roll-name" href="${d.l}" target="_blank" rel="noopener noreferrer">${d.n}</a>
+        <div class="roll-meta">
+          ${d.y ? `<span>${d.y} г.р.</span>` : ''}
+          ${birth ? `${d.y ? ' · ' : ''}<span class="b">${birth}</span>` : ''}
+          ${d.s ? ` · ${d.s}` : ''}${extraLinks}
+        </div>
+      </div>
+      <span class="roll-status">${d.t}</span>
+    `;
+    rl.appendChild(li);
+  });
+
+  // Search & filter
+  const search = document.getElementById('roll-search');
+  const filters = document.getElementById('roll-filters');
+  let activeFilter = 'all';
+  let activeQuery = '';
+
+  function applyFilter() {
+    let visibleCount = 0;
+    const items = rl.querySelectorAll('.roll-item');
+    items.forEach(it => {
+      const matchesQ = !activeQuery || it.dataset.name.includes(activeQuery);
+      let matchesF = true;
+      if (activeFilter === 'fallen') matchesF = it.dataset.cls === 'fallen' || it.dataset.cls === 'missing';
+      else if (activeFilter === 'awarded') matchesF = it.dataset.cls === 'awarded';
+      else if (activeFilter === 'wounded') matchesF = it.dataset.cls === 'wounded';
+      const visible = matchesQ && matchesF;
+      it.classList.toggle('hidden', !visible);
+      if (visible) visibleCount++;
+    });
+    // hide letters whose group is empty
+    const wrappers = rl.querySelectorAll('.roll-letter-wrap');
+    wrappers.forEach(w => {
+      let n = w.nextElementSibling;
+      let any = false;
+      while (n && !n.classList.contains('roll-letter-wrap')) {
+        if (n.classList.contains('roll-item') && !n.classList.contains('hidden')) { any = true; break; }
+        n = n.nextElementSibling;
+      }
+      w.style.display = any ? '' : 'none';
+    });
+    rlEmpty.classList.toggle('visible', visibleCount === 0);
+  }
+
+  search.addEventListener('input', e => {
+    activeQuery = e.target.value.trim().toLowerCase();
+    applyFilter();
+  });
+
+  filters.addEventListener('click', e => {
+    const btn = e.target.closest('button');
+    if (!btn) return;
+    filters.querySelectorAll('button').forEach(b => {
+      b.classList.remove('active', 'fallen-active');
+    });
+    btn.classList.add('active');
+    if (btn.dataset.filter === 'fallen') btn.classList.add('fallen-active');
+    activeFilter = btn.dataset.filter;
+    applyFilter();
+  });
+
+  // ── Reveal on scroll (progressive enhancement) ──────
+  if ('IntersectionObserver' in window) {
+    document.documentElement.classList.add('reveal-ready');
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if (en.isIntersecting) {
+          en.target.classList.add('in');
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    // Safety net: reveal everything after 2s no matter what
+    setTimeout(() => {
+      document.querySelectorAll('.reveal:not(.in)').forEach(el => el.classList.add('in'));
+    }, 2000);
+  }
+
+  // Stagger animation for stats / marks
+  document.querySelectorAll('.stat.reveal').forEach((el, i) => {
+    el.style.transitionDelay = (i * 0.08) + 's';
+  });
+})();
+</script>
+
+</body>
+</html>
