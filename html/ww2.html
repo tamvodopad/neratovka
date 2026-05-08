@@ -146,6 +146,107 @@
     transform: translateY(-0.05em);
   }
 
+  /* ──── GEORGE RIBBON ─────────────────────────────────
+     Орденская «гвардейская» (георгиевская) лента — символ
+     воинской доблести и памяти. 3 чёрные + 2 оранжевые
+     полосы. Цвета приглушены под общую палитру paper. */
+  .ribbon-thin {
+    display: block;
+    width: clamp(180px, 28vw, 260px);
+    height: 14px;
+    margin: 28px auto 0;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      #1a1410 0 2.8px,
+      #c5821a 2.8px 5.6px,
+      #1a1410 5.6px 8.4px,
+      #c5821a 8.4px 11.2px,
+      #1a1410 11.2px 14px
+    );
+    box-shadow: 0 1px 0 rgba(0,0,0,0.18), 0 6px 14px -8px rgba(50,30,5,0.4);
+    position: relative;
+  }
+  /* triangular notches at the ends — like a cut ribbon */
+  .ribbon-thin::before,
+  .ribbon-thin::after {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 10px;
+    background: var(--paper);
+  }
+  .ribbon-thin::before {
+    left: 0;
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
+  }
+  .ribbon-thin::after {
+    right: 0;
+    clip-path: polygon(100% 0, 0 50%, 100% 100%);
+  }
+
+  /* Larger ribbon — for the closing memorial section.
+     Сделана как два «хвоста» расходящиеся под углом, плюс
+     центральный «узелок». Тёмный фон closing требует более
+     насыщенного оранжевого. */
+  .ribbon-bow {
+    display: block;
+    width: clamp(220px, 38vw, 360px);
+    margin: 0 auto 36px;
+    position: relative;
+    height: 56px;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
+  }
+  .ribbon-bow::before,
+  .ribbon-bow::after {
+    content: "";
+    position: absolute;
+    top: 12px;
+    height: 32px;
+    width: 50%;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      #0f0a08 0 6.4px,
+      #d68a2c 6.4px 12.8px,
+      #0f0a08 12.8px 19.2px,
+      #d68a2c 19.2px 25.6px,
+      #0f0a08 25.6px 32px
+    );
+  }
+  .ribbon-bow::before {
+    left: 0;
+    transform: skewX(-6deg);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 12px 50%);
+    box-shadow: inset -6px 0 16px -4px rgba(0,0,0,0.5);
+  }
+  .ribbon-bow::after {
+    right: 0;
+    transform: skewX(6deg);
+    clip-path: polygon(0 0, 100% 0, calc(100% - 12px) 50%, 100% 100%, 0 100%);
+    box-shadow: inset 6px 0 16px -4px rgba(0,0,0,0.5);
+  }
+  /* central "knot" overlap */
+  .ribbon-bow > span {
+    position: absolute;
+    left: 50%;
+    top: 8px;
+    transform: translateX(-50%);
+    width: 36px;
+    height: 40px;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      #0f0a08 0 8px,
+      #d68a2c 8px 16px,
+      #0f0a08 16px 24px,
+      #d68a2c 24px 32px,
+      #0f0a08 32px 40px
+    );
+    z-index: 2;
+    box-shadow:
+      inset 0 0 0 1px rgba(0,0,0,0.4),
+      0 0 0 1px rgba(0,0,0,0.2),
+      0 4px 6px rgba(0,0,0,0.3);
+  }
+
   .village {
     font-family: "Old Standard TT", "PT Serif", serif;
     font-weight: 700;
@@ -895,6 +996,7 @@
   <div class="hero-stage">
     <p class="eyebrow">Великая&nbsp;Отечественная</p>
     <h1 class="years"><span>1941</span><span class="dash">—</span><span>1945</span></h1>
+    <span class="ribbon-thin" role="presentation" aria-hidden="true"></span>
     <p class="village">Нератовка</p>
     <p class="hero-sub">110 уроженцев села на фронтах<br/>Великой Отечественной войны</p>
   </div>
@@ -1009,6 +1111,7 @@
 
 <!-- ═══ CLOSING ═══ -->
 <section class="closing">
+  <span class="ribbon-bow" role="presentation" aria-hidden="true"><span></span></span>
   <p class="closing-eyebrow">Девятое мая</p>
   <p class="closing-line">
     <strong>Никто не забыт,</strong><br/>
