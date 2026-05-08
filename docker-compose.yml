@@ -5,7 +5,7 @@ services:
     container_name: neratovka-website
     restart: unless-stopped
     networks:
-      - nginx_proxy
+      - nginx-proxy
 
     # ── Routing config ──────────────────────────────────────────────
     # Pick ONE of the blocks below depending on what's running on the host.
@@ -28,6 +28,6 @@ services:
     #   - "traefik.http.services.neratovka.loadbalancer.server.port=80"
 
 networks:
-  nginx_proxy:
-    name: nginx_proxy
+  nginx-proxy:
+    name: nginx-proxy
     external: true
