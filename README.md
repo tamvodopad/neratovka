@@ -10,6 +10,7 @@
 html/
   index.html   — placeholder (пока пусто, noindex)
   ww2.html     — Книга Памяти 1941–1945, 110 уроженцев
+Dockerfile         — nginx:alpine + статика, всё внутри образа
 docker-compose.yml — деплой через nginx + reverse-proxy
 nginx.conf         — конфиг внутреннего nginx
 ```

@@ -1,11 +1,9 @@
 services:
   web:
-    image: nginx:alpine
+    build: .
+    image: neratovka-website:latest
     container_name: neratovka-website
     restart: unless-stopped
-    volumes:
-      - ./html:/usr/share/nginx/html:ro
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
     networks:
       - nginx_proxy
 
