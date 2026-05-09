@@ -69,32 +69,72 @@
 
   /* ──── HERO ──────────────────────────────────────────── */
   .hero {
-    min-height: 100svh;
+    min-height: calc(100svh - 50px);
     display: grid;
-    grid-template-rows: auto 1fr auto;
-    padding: 32px 24px 28px;
+    grid-template-rows: 1fr auto;
+    padding: 24px 24px 28px;
     border-bottom: 1px solid var(--rule);
     position: relative;
   }
 
-  .topbar {
+  /* ──── TOP NAV ────────────────────────────────────────
+     Becomes sticky once user scrolls past the hero — using
+     position: sticky + a JS-toggled .scrolled state for the
+     refined "rule below" line and slight backdrop-blur. */
+  .topnav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 24px;
+    margin: -32px -24px 0;
     font-family: "PT Serif Caption", "PT Serif", serif;
     font-size: 12px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--ink-faded);
+    background: rgba(235, 226, 207, 0);
+    transition: background 0.25s ease, border-color 0.25s ease;
+    border-bottom: 1px solid transparent;
+  }
+  .topnav.scrolled {
+    background: rgba(235, 226, 207, 0.92);
+    backdrop-filter: blur(8px) saturate(110%);
+    -webkit-backdrop-filter: blur(8px) saturate(110%);
+    border-bottom-color: var(--rule);
   }
 
-  .topbar a {
-    color: inherit;
-    text-decoration: none;
-    border-bottom: 1px solid var(--rule);
-    padding-bottom: 1px;
+  .topnav .brand {
+    flex-shrink: 0;
+    color: var(--ink-faded);
   }
-  .topbar a:hover { color: var(--banner); border-bottom-color: var(--banner); }
+
+  .topnav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .topnav-links::-webkit-scrollbar { display: none; }
+
+  .topnav-links a {
+    color: var(--ink-faded);
+    text-decoration: none;
+    padding-bottom: 2px;
+    border-bottom: 1px solid transparent;
+    transition: color 0.16s, border-color 0.16s;
+    white-space: nowrap;
+  }
+  .topnav-links a:hover {
+    color: var(--banner);
+    border-bottom-color: var(--banner);
+  }
 
   .hero-stage {
     display: flex;
@@ -305,6 +345,7 @@
     padding: clamp(64px, 9vh, 128px) 24px;
     position: relative;
     border-bottom: 1px solid var(--rule);
+    scroll-margin-top: 56px;
   }
 
   .container {
@@ -988,11 +1029,18 @@
 <main>
 
 <!-- ═══ HERO ═══ -->
+<nav class="topnav" id="topnav" aria-label="Навигация">
+  <span class="brand">Нератовка · Книга&nbsp;Памяти</span>
+  <ul class="topnav-links">
+    <li><a href="#dedication">Слово</a></li>
+    <li><a href="#stats">Цифры</a></li>
+    <li><a href="#marks">Имена</a></li>
+    <li><a href="#roll">Список</a></li>
+    <li><a href="#closing">Помним</a></li>
+  </ul>
+</nav>
+
 <header class="hero">
-  <nav class="topbar" aria-label="Шапка">
-    <span>Книга&nbsp;Памяти · село&nbsp;Нератовка</span>
-    <a href="./index.html">tamvodopad ↗</a>
-  </nav>
 
   <div class="hero-stage">
     <p class="eyebrow">Великая&nbsp;Отечественная</p>
@@ -1009,7 +1057,7 @@
 </header>
 
 <!-- ═══ DEDICATION ═══ -->
-<section class="dedication">
+<section class="dedication" id="dedication">
   <div class="container--narrow">
     <p class="section-mark">Слово памяти</p>
     <p class="lead reveal">«Земля Татарии и наша Нератовка отдали войне сотни своих сыновей и дочерей. Эта страница — попытка вернуть их имена.»</p>
@@ -1025,7 +1073,7 @@
 </section>
 
 <!-- ═══ STATS ═══ -->
-<section>
+<section id="stats">
   <div class="container">
     <p class="section-mark">В цифрах</p>
     <h2 class="section-title">Поимённо. Покрупному.</h2>
@@ -1056,7 +1104,7 @@
 </section>
 
 <!-- ═══ MARKS ═══ -->
-<section>
+<section id="marks">
   <div class="container">
     <p class="section-mark">Фронтовая перекличка</p>
     <h2 class="section-title">Сто тридцать имён.</h2>
@@ -1089,7 +1137,7 @@
 </section>
 
 <!-- ═══ ROLL CALL ═══ -->
-<section>
+<section id="roll">
   <div class="container">
     <p class="section-mark">Перекличка имён</p>
     <h2 class="section-title">Список уроженцев</h2>
@@ -1112,7 +1160,7 @@
 </section>
 
 <!-- ═══ CLOSING ═══ -->
-<section class="closing">
+<section class="closing" id="closing">
   <span class="ribbon-bow" role="presentation" aria-hidden="true"><span></span></span>
   <p class="closing-eyebrow">Девятое мая</p>
   <p class="closing-line">
@@ -1347,6 +1395,16 @@
     activeFilter = btn.dataset.filter;
     applyFilter();
   });
+
+  // ── Sticky topnav: toggle .scrolled when past hero ──
+  const topnav = document.getElementById('topnav');
+  if (topnav) {
+    const onScroll = () => {
+      topnav.classList.toggle('scrolled', window.scrollY > 80);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
 
   // ── Reveal on scroll (progressive enhancement) ──────
   if ('IntersectionObserver' in window) {
