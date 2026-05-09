@@ -90,7 +90,6 @@
     align-items: center;
     gap: 16px;
     padding: 14px 24px;
-    margin: -32px -24px 0;
     font-family: "PT Serif Caption", "PT Serif", serif;
     font-size: 12px;
     letter-spacing: 0.18em;
@@ -111,6 +110,8 @@
     flex-shrink: 0;
     color: var(--ink-faded);
   }
+  .topnav .brand-short { display: none; }
+  .topnav .brand-full { display: inline; }
 
   .topnav-links {
     list-style: none;
@@ -1028,33 +1029,180 @@
     transform: none;
   }
 
-  /* Mobile */
-  @media (max-width: 640px) {
-    body { font-size: 17px; }
-    .hero { padding: 24px 18px 22px; }
-    section { padding: 56px 18px; }
-    .topbar { font-size: 11px; gap: 10px; }
+  /* ──── MOBILE (≤ 720px) ───────────────────────────── */
+  @media (max-width: 720px) {
+    body { font-size: 16px; }
+
+    /* Topnav */
+    .topnav {
+      padding: 10px 14px;
+      font-size: 10.5px;
+      letter-spacing: 0.12em;
+      gap: 10px;
+    }
+    .topnav .brand {
+      flex-shrink: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      min-width: 0;
+    }
+    /* On small phones, drop the verbose brand — leave just the
+       Нератовка word so the menu has room to breathe. */
+    .topnav .brand-full { display: none; }
+    .topnav .brand-short { display: inline; }
+    .topnav-links { gap: 14px; flex-shrink: 0; }
+
+    /* Hero */
+    .hero {
+      padding: 16px 16px 20px;
+      min-height: calc(100svh - 44px);
+    }
+    .hero-stage { padding: 16px 0; }
+
+    .eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .eyebrow::before, .eyebrow::after { width: 22px; }
+
+    /* Years stay strictly centered on mobile, never overflow */
+    .years {
+      font-size: clamp(40px, 13.5vw, 80px);
+      gap: clamp(4px, 1.6vw, 12px);
+      width: 100%;
+      justify-content: center;
+      min-width: 0;
+    }
+    .years .dash {
+      font-size: 0.55em;
+    }
+    .village { font-size: clamp(30px, 9vw, 56px); margin-top: 24px; }
+    .hero-sub {
+      font-size: 14px;
+      margin-top: 18px;
+      max-width: 28ch;
+    }
+
+    .ribbon-thin { width: clamp(140px, 50vw, 200px); height: 11px; margin-top: 18px; }
+    .ribbon-thin::before, .ribbon-thin::after { width: 8px; }
+
+    .hero-meta { font-size: 10px; padding-top: 12px; }
+
+    /* Sections */
+    section {
+      padding: 56px 16px;
+      scroll-margin-top: 50px;
+    }
+    h2.section-title { font-size: clamp(28px, 7vw, 40px); margin-bottom: 24px; }
+    .section-mark { font-size: 10px; letter-spacing: 0.32em; }
+    .section-mark::before { width: 22px; }
+
+    /* Dedication */
+    .dedication .lead { font-size: clamp(18px, 5vw, 24px); margin-bottom: 28px; }
+    .dedication p { font-size: 15.5px; }
+    .dedication p:first-of-type::first-letter {
+      font-size: 3.2em;
+      padding: 4px 8px 0 0;
+    }
+    .container--narrow { padding: 0 4px; }
+
+    /* Stats line + proportion */
+    .stats-line { font-size: clamp(18px, 5vw, 22px); margin-bottom: 28px; }
+    .stats-line .num { font-size: 1.15em; }
+    .proportion { height: 22px; }
+    .proportion-legend {
+      gap: 6px 14px;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+    }
+    .proportion-legend strong { font-size: 12px; }
+
+    /* Marks grid: tighter */
+    .marks-grid {
+      gap: 3px;
+      padding: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(20px, 1fr));
+    }
+
+    /* Age histogram: shorter, simpler labels */
+    .age-hist { height: 160px; gap: 2px; padding: 0 2px 22px; }
+    .age-hist-col { min-width: 6px; max-width: 18px; }
+    .age-hist-col .age-hist-year { font-size: 9px; bottom: -18px; }
+    .age-hist-col .age-hist-count { font-size: 10px; top: -14px; }
+    .age-hist-axis {
+      font-size: 9.5px;
+      letter-spacing: 0.1em;
+      gap: 4px;
+    }
+    .age-hist-axis em { font-size: 10px; }
+    /* Hide the middle "← старше · моложе →" hint on narrow phones */
+    .age-hist-axis span:nth-child(2) { display: none; }
+
+    .chart-block { margin-top: 40px; }
+    .chart-title { font-size: 17px; }
+    .chart-sub { font-size: 13px; margin-bottom: 20px; }
+
+    /* Roll list */
+    .roll-controls { gap: 12px; }
+    .roll-search { font-size: 16px; flex-basis: 100%; }
+    .roll-filters {
+      width: 100%;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+    .roll-filters button {
+      font-size: 10px;
+      padding: 5px 9px;
+      letter-spacing: 0.12em;
+    }
     .roll-item {
-      grid-template-columns: 28px 1fr;
-      grid-template-rows: auto auto;
+      grid-template-columns: 30px 1fr;
+      grid-template-rows: auto auto auto;
+      gap: 4px 12px;
+      padding: 12px 0;
     }
+    .roll-num { padding-top: 4px; font-size: 11px; }
+    .roll-name { font-size: 16.5px; }
     .roll-status {
-      grid-column: 1 / -1;
+      grid-column: 2 / -1;
+      grid-row: 3;
       text-align: left;
-      padding-left: 46px;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      padding-top: 2px;
     }
-    .marks-grid { gap: 4px; padding: 18px; }
-    .stat { padding: 28px 16px; }
-    .years-chart { grid-template-columns: 50px 1fr 28px; gap: 3px 10px; }
-    .years-chart .yc-year { font-size: 12px; }
-    .years-chart .yc-year .age { font-size: 10px; }
-    .dedication p:first-of-type::first-letter { font-size: 3.4em; }
+    .roll-meta { font-size: 13px; line-height: 1.5; }
+    .roll-letter { font-size: 36px; margin-top: 24px; }
+
+    /* Closing */
+    .closing { padding: 64px 16px; }
+    .closing-line { font-size: clamp(24px, 7.5vw, 40px); }
+    .closing-attr { font-size: 13px; }
+    .footer-meta { font-size: 12.5px; padding: 24px 4px 0; margin-top: 56px; }
+
+    .ribbon-bow {
+      width: clamp(180px, 60vw, 260px);
+      height: 44px;
+      margin-bottom: 28px;
+    }
+    .ribbon-bow::before, .ribbon-bow::after { top: 10px; height: 24px; }
+    .ribbon-bow > span { width: 28px; height: 32px; top: 6px; }
+  }
+
+  /* Very narrow (≤360px, e.g. older iPhone SE) */
+  @media (max-width: 360px) {
+    .topnav .brand { display: none; }
+    .marks-grid { padding: 10px; gap: 2px; }
+    .years { font-size: 14vw; }
   }
 
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }
     .reveal { opacity: 1; transform: none; }
-    .yc-bar { width: var(--target-width) !important; }
+    .age-hist-bar { height: var(--target-height) !important; }
   }
 </style>
 </head>
@@ -1063,7 +1211,10 @@
 
 <!-- ═══ HERO ═══ -->
 <nav class="topnav" id="topnav" aria-label="Навигация">
-  <span class="brand">Нератовка · Книга&nbsp;Памяти</span>
+  <span class="brand">
+    <span class="brand-full">Нератовка · Книга&nbsp;Памяти</span>
+    <span class="brand-short">Нератовка</span>
+  </span>
   <ul class="topnav-links">
     <li><a href="#dedication">Слово</a></li>
     <li><a href="#stats">Цифры</a></li>
