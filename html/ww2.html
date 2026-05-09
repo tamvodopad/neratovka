@@ -71,7 +71,7 @@
   .hero {
     min-height: calc(100svh - 50px);
     display: grid;
-    grid-template-rows: 1fr auto;
+    place-items: center;
     padding: 24px 24px 28px;
     border-bottom: 1px solid var(--rule);
     position: relative;
@@ -306,39 +306,6 @@
     font-size: clamp(16px, 1.6vw, 20px);
     margin: 28px 0 0 0;
     max-width: 38ch;
-  }
-
-  .hero-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    font-family: "PT Serif Caption", "PT Serif", serif;
-    font-size: 12px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--ink-faded);
-    border-top: 1px solid var(--rule);
-    padding-top: 16px;
-  }
-
-  .scroll-hint {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .scroll-hint::after {
-    content: "";
-    width: 1px;
-    height: 28px;
-    background: var(--ink-faded);
-    display: block;
-    animation: drip 2.4s ease-in-out infinite;
-    transform-origin: top;
-  }
-  @keyframes drip {
-    0%   { transform: scaleY(0); opacity: 0; }
-    40%  { transform: scaleY(1); opacity: 1; }
-    100% { transform: scaleY(1) translateY(28px); opacity: 0; }
   }
 
   /* ──── SECTIONS ──────────────────────────────────────── */
@@ -1117,8 +1084,6 @@
     .ribbon-thin { width: clamp(140px, 50vw, 200px); height: 11px; margin-top: 18px; }
     .ribbon-thin::before, .ribbon-thin::after { width: 8px; }
 
-    .hero-meta { font-size: 10px; padding-top: 12px; }
-
     /* Sections */
     section {
       padding: 56px 16px;
@@ -1261,11 +1226,6 @@
     <p class="village">Нератовка</p>
     <p class="hero-sub">130 уроженцев села на фронтах<br/>Великой Отечественной войны</p>
   </div>
-
-  <div class="hero-meta">
-    <span class="scroll-hint">Помним</span>
-    <span>№&nbsp;001 / 130</span>
-  </div>
 </header>
 
 <!-- ═══ DEDICATION ═══ -->
@@ -1333,8 +1293,7 @@
         <button data-filter="all" class="active">Все</button>
         <button data-filter="fallen">Погибшие</button>
         <button data-filter="missing">Пропавшие без вести</button>
-        <button data-filter="awarded">Награждённые</button>
-        <button data-filter="wounded">Ранены</button>
+        <button data-filter="returned">Вернувшиеся</button>
       </div>
     </div>
 
@@ -1541,8 +1500,7 @@
       let matchesF = true;
       if (activeFilter === 'fallen') matchesF = it.dataset.cls === 'fallen';
       else if (activeFilter === 'missing') matchesF = it.dataset.cls === 'missing';
-      else if (activeFilter === 'awarded') matchesF = it.dataset.cls === 'awarded';
-      else if (activeFilter === 'wounded') matchesF = it.dataset.cls === 'wounded';
+      else if (activeFilter === 'returned') matchesF = it.dataset.cls === 'awarded' || it.dataset.cls === 'wounded';
       const visible = matchesQ && matchesF;
       it.classList.toggle('hidden', !visible);
       if (visible) visibleCount++;
