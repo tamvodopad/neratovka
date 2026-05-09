@@ -430,47 +430,80 @@
     line-height: 1;
   }
 
-  /* ──── STATS ─────────────────────────────────────────── */
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 0;
-    border-top: 1px solid var(--rule);
-    border-left: 1px solid var(--rule);
-  }
-
-  .stat {
-    padding: 36px 28px;
-    border-right: 1px solid var(--rule);
-    border-bottom: 1px solid var(--rule);
+  /* ──── STATS — composed inline number sentence ──────── */
+  .stats-block {
     text-align: center;
+    margin: 0 auto 64px;
+    max-width: 720px;
+  }
+  .stats-line {
+    font-family: "Old Standard TT", "PT Serif", serif;
+    font-size: clamp(22px, 3vw, 32px);
+    line-height: 1.5;
+    color: var(--ink);
+    margin: 0 0 36px 0;
+    font-style: italic;
+  }
+  .stats-line .num {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.2em;
+    letter-spacing: -0.01em;
+  }
+  .stats-line .num--fallen { color: var(--banner); }
+  .stats-line .num--awarded { color: var(--gold); }
+
+  /* Single stacked proportion bar — visual companion */
+  .proportion {
+    display: flex;
+    height: 28px;
+    margin: 24px 0 14px;
+    border: 1px solid var(--rule);
+    background: var(--paper-soft);
+    overflow: hidden;
+    box-shadow: inset 0 0 0 2px var(--paper-soft), inset 0 0 0 3px var(--paper-edge);
+  }
+  .proportion-seg {
+    height: 100%;
+    transition: filter 0.18s;
+    cursor: help;
     position: relative;
   }
+  .proportion-seg:hover { filter: brightness(1.08); }
+  .proportion-seg--fallen   { background: var(--banner); }
+  .proportion-seg--missing  { background: var(--banner-deep); }
+  .proportion-seg--awarded  { background: var(--gold); }
+  .proportion-seg--wounded  { background: var(--ink-soft); }
+  .proportion-seg--rest     { background: var(--ink-quiet); }
 
-  .stat-num {
-    font-family: "Old Standard TT", "PT Serif", serif;
-    font-size: clamp(56px, 7vw, 96px);
-    line-height: 0.95;
-    color: var(--ink);
-    margin: 0;
-    font-weight: 400;
-  }
-  .stat--accent .stat-num { color: var(--banner); }
-  .stat--gold .stat-num { color: var(--gold); }
-
-  .stat-label {
+  .proportion-legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 22px;
     font-family: "PT Serif Caption", "PT Serif", serif;
     font-size: 11px;
-    letter-spacing: 0.32em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--ink-faded);
-    margin: 14px 0 0 0;
   }
-  .stat-note {
-    font-style: italic;
-    font-size: 14px;
-    color: var(--ink-faded);
-    margin: 6px 0 0 0;
+  .proportion-legend span { display: inline-flex; align-items: center; gap: 8px; }
+  .proportion-legend span::before {
+    content: "";
+    width: 11px; height: 11px;
+    flex-shrink: 0;
+  }
+  .proportion-legend .pl--fallen::before  { background: var(--banner); }
+  .proportion-legend .pl--missing::before { background: var(--banner-deep); }
+  .proportion-legend .pl--awarded::before { background: var(--gold); }
+  .proportion-legend .pl--wounded::before { background: var(--ink-soft); }
+  .proportion-legend .pl--rest::before    { background: var(--ink-quiet); }
+  .proportion-legend strong {
+    font-family: "Old Standard TT", "PT Serif", serif;
+    font-size: 13px;
+    color: var(--ink);
+    font-weight: 700;
+    letter-spacing: 0;
   }
 
   /* ──── 126 MARKS GRID ────────────────────────────────── */
@@ -636,97 +669,97 @@
     font-size: 15px;
   }
 
-  .years-chart {
-    display: grid;
-    grid-template-columns: 64px 1fr 38px;
-    gap: 4px 16px;
-    align-items: center;
-    font-family: "PT Serif", serif;
-    font-size: 14px;
-  }
-
-  .yc-year {
-    text-align: right;
-    color: var(--ink-faded);
-    font-variant-numeric: tabular-nums;
-  }
-  .yc-year strong {
-    color: var(--ink);
-    font-weight: 700;
-  }
-  .yc-year .age {
-    display: block;
-    font-size: 11px;
-    color: var(--ink-quiet);
-    font-style: italic;
-  }
-  .yc-bar {
-    height: 14px;
-    background: var(--ink);
-    transition: width 1s cubic-bezier(.2,.8,.2,1);
-    width: 0;
+  /* ──── AGE HISTOGRAM ─────────────────────────────────
+     Vertical column chart, one bar per year of birth.
+     Bars in red where призывной возраст 1941 ≤ 22.
+     Compact, replaces a 30-row horizontal chart. */
+  .age-hist {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 3px;
+    height: 220px;
+    padding: 0 4px 24px;
+    margin: 0 auto 8px;
+    border-bottom: 1px solid var(--ink-faded);
     position: relative;
   }
-  .yc-bar.young { background: var(--banner); }
-  .yc-bar.youngest { background: var(--banner); position: relative; }
-  .yc-bar.youngest::after {
+  .age-hist-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1 1 0;
+    max-width: 28px;
+    min-width: 8px;
+    position: relative;
+    height: 100%;
+    justify-content: flex-end;
+  }
+  .age-hist-bar {
+    width: 100%;
+    background: var(--ink-soft);
+    transition: height 1s cubic-bezier(.2,.8,.2,1);
+    height: 0;
+    position: relative;
+  }
+  .age-hist-col.young .age-hist-bar { background: var(--banner); }
+  .age-hist-col.peak .age-hist-bar  { background: var(--banner); }
+  .age-hist-col.peak .age-hist-bar::before {
     content: "";
     position: absolute;
-    right: -2px; top: -3px; bottom: -3px;
-    width: 2px;
+    top: -8px; left: 0; right: 0;
+    height: 4px;
     background: var(--banner-deep);
   }
-  .yc-count {
-    font-variant-numeric: tabular-nums;
-    color: var(--ink);
-    font-weight: 700;
-    text-align: left;
-  }
-
-  /* ──── STATUS DISTRIBUTION ───────────────────────────── */
-  .status-list {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    border-top: 1px solid var(--rule);
-  }
-  .status-list li {
-    display: grid;
-    grid-template-columns: 1fr auto 56px;
-    gap: 16px;
-    align-items: center;
-    padding: 14px 0;
-    border-bottom: 1px solid var(--rule);
-  }
-  .status-name {
-    font-size: 17px;
-  }
-  .status-bar {
-    width: clamp(120px, 30vw, 320px);
-    height: 6px;
-    background: var(--paper-deep);
-    position: relative;
-  }
-  .status-bar::after {
-    content: "";
+  .age-hist-col .age-hist-count {
     position: absolute;
-    inset: 0;
-    background: var(--ink);
-    width: var(--w, 0%);
-    transition: width 1.2s cubic-bezier(.2,.8,.2,1);
-  }
-  .status-list li.fallen .status-bar::after { background: var(--banner); }
-  .status-list li.fallen .status-name { color: var(--banner); }
-  .status-list li.awarded .status-bar::after { background: var(--gold); }
-  .status-count {
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
     font-family: "Old Standard TT", "PT Serif", serif;
-    font-size: 22px;
-    font-variant-numeric: tabular-nums;
-    text-align: right;
+    font-size: 12px;
     color: var(--ink);
+    opacity: 0;
+    transition: opacity 0.16s;
+    font-weight: 700;
+    pointer-events: none;
+  }
+  .age-hist-col:hover .age-hist-count,
+  .age-hist-col.peak .age-hist-count { opacity: 1; }
+  .age-hist-col .age-hist-year {
+    position: absolute;
+    bottom: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: "PT Serif Caption", "PT Serif", serif;
+    font-size: 11px;
+    color: var(--ink-quiet);
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.16s, color 0.16s;
+  }
+  .age-hist-col.label-shown .age-hist-year { opacity: 1; }
+  .age-hist-col.peak .age-hist-year { opacity: 1; color: var(--banner); font-weight: 700; }
+  .age-hist-col:hover .age-hist-year { opacity: 1; color: var(--banner); }
+
+  .age-hist-axis {
+    display: flex;
+    justify-content: space-between;
+    font-family: "PT Serif Caption", "PT Serif", serif;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+    padding: 8px 4px 0;
+    margin-top: 24px;
+  }
+  .age-hist-axis em {
+    font-style: italic;
+    color: var(--banner);
+    text-transform: none;
+    letter-spacing: 0;
+    font-family: "PT Serif", serif;
+    font-size: 12px;
   }
 
   /* ──── ROLL CALL (full list) ─────────────────────────── */
@@ -1072,66 +1105,38 @@
   </div>
 </section>
 
-<!-- ═══ STATS ═══ -->
+<!-- ═══ STATS + MARKS + AGE — combined compact section ═══ -->
 <section id="stats">
   <div class="container">
     <p class="section-mark">В цифрах</p>
-    <h2 class="section-title">Поимённо. Покрупному.</h2>
-
-    <div class="stats-grid">
-      <div class="stat reveal">
-        <p class="stat-num">130</p>
-        <p class="stat-label">Уроженцев</p>
-        <p class="stat-note">установлено в архивах</p>
-      </div>
-      <div class="stat stat--accent reveal">
-        <p class="stat-num">59</p>
-        <p class="stat-label">Не вернулись</p>
-        <p class="stat-note">погибли или пропали</p>
-      </div>
-      <div class="stat stat--gold reveal">
-        <p class="stat-num">12</p>
-        <p class="stat-label">Удостоены наград</p>
-        <p class="stat-note">за подвиг на фронте</p>
-      </div>
-      <div class="stat reveal">
-        <p class="stat-num">5</p>
-        <p class="stat-label">Ранены</p>
-        <p class="stat-note">учтены в картотеке</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ MARKS ═══ -->
-<section id="marks">
-  <div class="container">
-    <p class="section-mark">Фронтовая перекличка</p>
     <h2 class="section-title">Сто тридцать имён.</h2>
-    <p class="chart-sub" style="max-width:60ch;margin-bottom:0;">Каждая отметка — один уроженец Нератовки. Наведите курсор, чтобы увидеть имя.</p>
 
+    <!-- Stats sentence + proportion bar -->
+    <div class="stats-block">
+      <p class="stats-line reveal">
+        Из <span class="num">130</span> уроженцев села <span class="num num--fallen">59</span>&nbsp;не вернулись с войны.<br/>
+        <span class="num num--awarded">12</span> удостоены наград.
+      </p>
+      <div class="proportion" id="proportion" role="img" aria-label="Распределение судеб 130 уроженцев"></div>
+      <div class="proportion-legend" id="proportion-legend"></div>
+    </div>
+
+    <!-- 130 marks (kept as is — favorite viz) -->
     <div class="marks-wrap">
+      <p class="chart-sub" style="text-align:center;max-width:60ch;margin:0 auto 24px;">Каждая отметка — один уроженец Нератовки. Наведите курсор, чтобы увидеть имя.</p>
       <div class="marks-grid" id="marks-grid" aria-label="Сетка из 130 уроженцев"></div>
+    </div>
 
-      <div class="marks-legend">
-        <span class="legend-item"><span class="legend-swatch legend-swatch--other"></span>Участник</span>
-        <span class="legend-item"><span class="legend-swatch legend-swatch--fallen"></span>Погиб</span>
-        <span class="legend-item"><span class="legend-swatch legend-swatch--missing"></span>Пропал без вести</span>
-        <span class="legend-item"><span class="legend-swatch legend-swatch--awarded"></span>Награждён</span>
-        <span class="legend-item"><span class="legend-swatch legend-swatch--wounded"></span>Ранен</span>
+    <!-- Age histogram — vertical, compact -->
+    <div class="chart-block">
+      <h3 class="chart-title">Возраст призывников к началу войны</h3>
+      <p class="chart-sub">Год 1924-й — двенадцать человек, семнадцатилетние. Красным — те, кому к началу войны было 22 и меньше.</p>
+      <div class="age-hist" id="age-hist" aria-label="Распределение по году рождения"></div>
+      <div class="age-hist-axis">
+        <span>1893 <em>(48 лет)</em></span>
+        <span style="text-align:center;">←&nbsp;старше&nbsp;·&nbsp;моложе&nbsp;→</span>
+        <span><em>(14 лет)</em> 1927</span>
       </div>
-    </div>
-
-    <div class="chart-block">
-      <h3 class="chart-title">Год рождения и возраст к началу войны</h3>
-      <p class="chart-sub">Самые молодые уходили на фронт в семнадцать. Год 1924-й — двенадцать человек.</p>
-      <div class="years-chart" id="years-chart" role="list"></div>
-    </div>
-
-    <div class="chart-block">
-      <h3 class="chart-title">Что известно о судьбах</h3>
-      <p class="chart-sub">Распределение по статусам в архивах «Память народа».</p>
-      <ul class="status-list" id="status-list"></ul>
     </div>
   </div>
 </section>
@@ -1232,72 +1237,70 @@
   grid.addEventListener('focusin', showTip);
   grid.addEventListener('focusout', hideTip);
 
-  // ── Years chart ─────────────────────────────────────
+  // ── Age histogram (vertical) ────────────────────────
   const yearCounts = {};
   data.forEach(d => {
     const y = parseInt(d.y, 10);
-    if (!isNaN(y)) yearCounts[y] = (yearCounts[y] || 0) + 1;
+    if (!isNaN(y) && y >= 1880 && y <= 1930) yearCounts[y] = (yearCounts[y] || 0) + 1;
   });
-  const years = Object.keys(yearCounts).map(Number).sort();
+  const yearKeys = Object.keys(yearCounts).map(Number);
+  const minY = Math.min(...yearKeys), maxY = Math.max(...yearKeys);
   const maxCount = Math.max(...Object.values(yearCounts));
-  const yc = document.getElementById('years-chart');
-  years.forEach(y => {
-    const count = yearCounts[y];
+  const peakYear = yearKeys.find(y => yearCounts[y] === maxCount);
+  const hist = document.getElementById('age-hist');
+  // Show year labels only at decade boundaries + at peak
+  const labelYears = new Set([1900, 1910, 1920, peakYear, minY, maxY]);
+  for (let y = minY; y <= maxY; y++) {
+    const count = yearCounts[y] || 0;
     const age = 1941 - y;
     const young = age <= 22;
-    const youngest = age <= 18;
-
-    const yLabel = document.createElement('div');
-    yLabel.className = 'yc-year';
-    yLabel.innerHTML = `<strong>${y}</strong><span class="age">${age} лет</span>`;
-    yc.appendChild(yLabel);
-
-    const bar = document.createElement('div');
-    bar.className = 'yc-bar' + (youngest ? ' youngest' : young ? ' young' : '');
-    const targetW = (count / maxCount * 100) + '%';
-    bar.style.setProperty('--target-width', targetW);
-    yc.appendChild(bar);
-
-    const c = document.createElement('div');
-    c.className = 'yc-count';
-    c.textContent = count;
-    yc.appendChild(c);
-
-    // animate when visible
+    const isPeak = y === peakYear;
+    const col = document.createElement('div');
+    col.className = 'age-hist-col' + (young ? ' young' : '') + (isPeak ? ' peak' : '') + (labelYears.has(y) ? ' label-shown' : '');
+    col.title = `${y} г.р. (${age} лет): ${count} человек`;
+    const targetH = count > 0 ? (count / maxCount * 100) + '%' : '2px';
+    col.innerHTML = `
+      <span class="age-hist-count">${count || ''}</span>
+      <div class="age-hist-bar" style="height:0"></div>
+      <span class="age-hist-year">${y}</span>
+    `;
+    hist.appendChild(col);
     requestAnimationFrame(() => {
-      setTimeout(() => { bar.style.width = targetW; }, 60);
+      setTimeout(() => { col.querySelector('.age-hist-bar').style.height = targetH; }, 60);
     });
-  });
+  }
 
-  // ── Status distribution ─────────────────────────────
+  // ── Stats proportion bar ────────────────────────────
   const statusCounts = {};
   data.forEach(d => statusCounts[d.t] = (statusCounts[d.t] || 0) + 1);
-  const statusOrder = [
-    ['Погиб', 'fallen'],
-    ['Пропал без вести', 'fallen'],
-    ['Погиб/Пропал', 'fallen'],
-    ['Награждён', 'awarded'],
-    ['Ранен', ''],
-    ['В именных списках', ''],
-    ['Призван (РВК)', ''],
-    ['Офицер (УПК)', ''],
-    ['Моряк', ''],
-    ['Неизвестен', ''],
-  ];
   const total = data.length;
-  const sl = document.getElementById('status-list');
-  statusOrder.forEach(([label, cls]) => {
-    const count = statusCounts[label] || 0;
-    if (!count) return;
-    const li = document.createElement('li');
-    if (cls) li.className = cls;
-    const w = (count / total * 100).toFixed(1) + '%';
-    li.innerHTML = `
-      <span class="status-name">${label}</span>
-      <span class="status-bar" style="--w:${w}"></span>
-      <span class="status-count">${count}</span>
-    `;
-    sl.appendChild(li);
+  // Aggregate: Fallen (Погиб + Погиб/Пропал), Missing, Awarded, Wounded, Rest
+  const fallenN  = (statusCounts['Погиб'] || 0) + (statusCounts['Погиб/Пропал'] || 0);
+  const missingN = statusCounts['Пропал без вести'] || 0;
+  const awardedN = statusCounts['Награждён'] || 0;
+  const woundedN = statusCounts['Ранен'] || 0;
+  const restN    = total - fallenN - missingN - awardedN - woundedN;
+  const segments = [
+    {cls: 'fallen',   label: 'Погибли',           n: fallenN},
+    {cls: 'missing',  label: 'Пропали без вести', n: missingN},
+    {cls: 'awarded',  label: 'Награждены',        n: awardedN},
+    {cls: 'wounded',  label: 'Ранены',            n: woundedN},
+    {cls: 'rest',     label: 'Прочие',            n: restN},
+  ];
+  const propBar = document.getElementById('proportion');
+  const propLeg = document.getElementById('proportion-legend');
+  segments.forEach(s => {
+    if (s.n === 0) return;
+    const pct = (s.n / total * 100);
+    const seg = document.createElement('div');
+    seg.className = `proportion-seg proportion-seg--${s.cls}`;
+    seg.style.flex = `${pct} 0 0`;
+    seg.title = `${s.label}: ${s.n} (${pct.toFixed(1)}%)`;
+    propBar.appendChild(seg);
+    const item = document.createElement('span');
+    item.className = `pl--${s.cls}`;
+    item.innerHTML = `${s.label} <strong>${s.n}</strong>`;
+    propLeg.appendChild(item);
   });
 
   // ── Roll call ───────────────────────────────────────
